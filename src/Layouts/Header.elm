@@ -1,7 +1,7 @@
 module Layouts.Header exposing (view)
 
 import Html exposing (Html, div, img)
-import Html.Attributes exposing (class, src, alt)
+import Html.Attributes exposing (alt, class, src)
 
 
 view : Html msg
