@@ -20,6 +20,7 @@ const stylelint = require('gulp-stylelint');
 const fileName = "main.css";
 
 const srcInput = {};
+srcInput.img = "./src/assets/images/";
 srcInput.css = "./src/assets/styles/";
 
 const srcOutput = {};
@@ -86,14 +87,34 @@ gulp.task("styles", function () {
 });
 
 /**
- * 🔥 Clean-up CSS
+ * 🖼️ Copy Images
  *
- * Removes all compiled CSS files in order to avoid conflicts.
+ * Copies images from source to public folder.
+ */
+gulp.task("images", function () {
+	return gulp
+		.src(srcInput.img + "**/*")
+		.pipe(gulp.dest("public/images"))
+		.on("finish", function () {
+            console.log("🖼 Finished copying images.");
+        });
+});
+
+/**
+ * 🔥 Clean-up
+ *
+ * Removes all compiled CSS files and copied images in order to avoid conflicts
+ * with old files that still remains.
  */
 gulp.task("clean", async function () {
 	const del = await import('del');
-	console.log('🧹 Deleting files in:', srcOutput.css + '*.css');
-	const deletedPaths = await del.deleteAsync([srcOutput.css + '*.css']);
+	console.log('🧹 Deleting styles in:', srcOutput.css + '*.css');
+	console.log('🧹 Deleting images in:', srcOutput.img + '**/*');
+
+	const deletedPaths = await del.deleteAsync([
+		srcOutput.css + '*.css',
+		srcOutput.img + '**/*',
+	]);
 	console.log('✅ Deleted:', deletedPaths);
 });
 
@@ -128,7 +149,11 @@ gulp.task("html", function () {
  * Task written for development mode.
  */
 gulp.task("watch", function () {
+	// Watch styles changes
 	gulp.watch(srcInput.css + "**/**/**/*.scss", gulp.series(["styles"]));
+
+	// Watch images changes
+	gulp.watch(srcInput.img + "**/*", gulp.series(["images"]));
 });
 
 /**
@@ -136,4 +161,4 @@ gulp.task("watch", function () {
  *
  * Task written for production mode.
  */
-gulp.task("build", gulp.series(["clean", "styles", "html"]));
+gulp.task("build", gulp.series(["clean", "styles", "images", "html"]));
