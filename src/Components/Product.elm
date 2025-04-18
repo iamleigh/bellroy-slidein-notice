@@ -9,5 +9,5 @@ viewProduct : Product -> Html msg
 viewProduct product =
     div [ class "bellroy-product" ]
         [ p [] [ text product.name ]
-        , p [] [ text ("$" ++ product.price) ]
+        , p [] [ text (product.price) ]
         ]
