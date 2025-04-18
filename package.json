@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	"start": "npx elm-live src/Main.elm --open -- --output=dist/main.js",
-	"build": "npx elm make src/Main.elm --output=dist/main.js",
+	"start": "npx elm-live src/Main.elm --open -- --output=public/main.js",
+	"build": "npx elm make src/Main.elm --output=public/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
