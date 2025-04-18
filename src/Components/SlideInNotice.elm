@@ -36,6 +36,7 @@ type alias SlideInNoticeModel =
     { visible : Bool
     , email : String
     , animating : Bool
+    , removed : Bool
     , animationClass : String
     }
 
@@ -45,6 +46,7 @@ slideInNoticeInit =
     { visible = False
     , email = ""
     , animating = False
+    , removed = True -- start fully removed
     , animationClass = ""
     }
 
@@ -68,6 +70,7 @@ slideInNoticeUpdate msg model =
             ( { model
                 | visible = True
                 , animating = True
+                , removed = False
                 , animationClass = "animate__animated animate__slideInUp"
               }
             , Cmd.none
@@ -85,6 +88,7 @@ slideInNoticeUpdate msg model =
             ( { model
                 | visible = False
                 , animating = False
+                , removed = True
                 , animationClass = ""
               }
             , Cmd.none
@@ -108,7 +112,9 @@ delayFinishExit =
 
 slideInNoticeView : Config -> SlideInNoticeModel -> Html Msg
 slideInNoticeView config model =
-    if model.visible then
+    if model.removed then
+        Html.text ""
+    else
         div [ class ("bellroy-notice slide-in-notice " ++ model.animationClass)
             , Html.Attributes.attribute "role" "alert"
             , Html.Attributes.attribute "aria-live" "assertive"
@@ -119,8 +125,6 @@ slideInNoticeView config model =
             , noticeForm config model
             , maybePrivacyText config.privacyText
             ]
-    else
-        Html.text ""
 
 
 dismissButton : Html Msg
