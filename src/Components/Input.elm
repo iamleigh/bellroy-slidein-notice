@@ -25,7 +25,7 @@ type alias InputConfig msg =
 input : InputConfig msg -> Html msg
 input config =
     Html.input
-        [ class (String.join " " config.classes)
+        [ class (String.join " " ("bellroy-input" :: config.classes))
         , type_ config.inputType
         , placeholder config.placeholderText
         , value config.value
