@@ -3,13 +3,15 @@ module Main exposing (init, main, update)
 import Browser
 import Browser.Events
 import Components.SlideInNotice exposing (Config, Msg(..), SlideInNoticeModel, slideInNoticeInit, slideInNoticeUpdate, slideInNoticeView)
-import Html exposing (Html, div, img, p, text)
-import Html.Attributes exposing (alt, class, id, src)
+import Html exposing (Html, div, p, text)
+import Html.Attributes exposing (class, id)
 import Json.Decode as Decode
 import Layouts.Body as Body
 import Layouts.Header as Header
+import Models.Product exposing (Product)
 import Process
 import Task
+import Http
 
 
 
@@ -17,17 +19,35 @@ import Task
 
 
 type alias Model =
-    SlideInNoticeModel
+    { slideInNotice : SlideInNoticeModel
+    , products : List Product
+    }
 
 
-init : Model
-init =
-    slideInNoticeInit
+type alias Flags =
+    ()
+
+
+init : Flags -> ( Model, Cmd Msg )
+init _ =
+    ( { slideInNotice = slideInNoticeInit
+      , products = []
+      }
+    , Cmd.batch [ showAfterDelay, fetchProducts ]
+    )
 
 
 showAfterDelay : Cmd Msg
 showAfterDelay =
     Task.perform (\_ -> SlideInNoticeMsg ShowNotice) (Process.sleep 1500)
+
+
+fetchProducts : Cmd Msg
+fetchProducts =
+    Http.get
+        { url = "/data/products.json"
+        , expect = Http.expectJson FetchProducts (Decode.list Models.Product.productDecoder)
+        }
 
 
 
@@ -37,6 +57,7 @@ showAfterDelay =
 type Msg
     = SlideInNoticeMsg Components.SlideInNotice.Msg
     | KeyPressed String
+    | FetchProducts (Result Http.Error (List Product))
 
 
 
@@ -49,17 +70,28 @@ update msg model =
         SlideInNoticeMsg slideInMsg ->
             let
                 ( updatedSlideIn, slideInCmd ) =
-                    slideInNoticeUpdate slideInMsg model
+                    slideInNoticeUpdate slideInMsg model.slideInNotice
             in
-            ( updatedSlideIn, Cmd.map SlideInNoticeMsg slideInCmd )
+            ( { model | slideInNotice = updatedSlideIn }
+            , Cmd.map SlideInNoticeMsg slideInCmd
+            )
+
+        FetchProducts (Ok products) ->
+            ( { model | products = products }, Cmd.none )
+
+        FetchProducts (Err _) ->
+            -- In case fetching fails, just keep products empty
+            ( model, Cmd.none )
 
         KeyPressed key ->
             if key == "Escape" then
                 let
-                    ( updatedModel, slideInCmd ) =
-                        slideInNoticeUpdate Components.SlideInNotice.DismissNotice model
+                    ( updatedSlideIn, slideInCmd ) =
+                        slideInNoticeUpdate Components.SlideInNotice.DismissNotice model.slideInNotice
                 in
-                ( updatedModel, Cmd.map SlideInNoticeMsg slideInCmd )
+                ( { model | slideInNotice = updatedSlideIn }
+                , Cmd.map SlideInNoticeMsg slideInCmd
+                )
             else
                 ( model, Cmd.none )
 
@@ -87,9 +119,9 @@ view model =
     div [ id "app", class "bellroy-ui" ]
         [ div [ class "bellroy-page" ]
             [ Header.view
-            , Body.view (SlideInNoticeMsg ShowNotice) model.visible
+            , Body.view model.products (SlideInNoticeMsg ShowNotice) model.slideInNotice.visible
             ]
-        , Html.map SlideInNoticeMsg (slideInNoticeView slideInNoticeConfig model)
+        , Html.map SlideInNoticeMsg (slideInNoticeView slideInNoticeConfig model.slideInNotice)
         ]
 
 
@@ -111,14 +143,10 @@ keyDecoder =
 -- MAIN
 
 
-type alias Flags =
-    ()
-
-
 main : Program Flags Model Msg
 main =
     Browser.element
-        { init = \_ -> ( init, showAfterDelay )
+        { init = init
         , update = update
         , view = view
         , subscriptions = subscriptions

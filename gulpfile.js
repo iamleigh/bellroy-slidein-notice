@@ -162,6 +162,23 @@ gulp.task("html", function () {
 });
 
 /**
+ * 💾 Copy JSON Data
+ *
+ * Ensures data files inside `src/data/` folder
+ * copies into `public/` folder.
+ */
+gulp.task("data", function () {
+	return (
+		gulp
+			.src("src/data/*.json")
+			.pipe(gulp.dest("public/data"))
+			.on("finish", function() {
+				console.log("📝 Finished copying data files.");
+			})
+	);
+});
+
+/**
  * 🧑🏻‍💻 Watch Changes
  *
  * Task written for development mode.
@@ -172,6 +189,9 @@ gulp.task("watch", function () {
 
 	// Watch images changes
 	gulp.watch(srcInput.img + "**/*", gulp.series(["images"]));
+
+	// Watch data folder changes
+	gulp.watch("src/data/*.json", gulp.series(["data"]));
 });
 
 /**
@@ -179,4 +199,4 @@ gulp.task("watch", function () {
  *
  * Task written for production mode.
  */
-gulp.task("build", gulp.series(["clean", "styles", "images", "html"]));
+gulp.task("build", gulp.series(["clean", "styles", "images", "data", "html"]));

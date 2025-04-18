@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Slim Sleeve Wallet",
+    "price": "$79",
+    "imageUrl": "/images/wallet.png"
+  },
+  {
+    "id": 2,
+    "name": "Tokyo Totepack",
+    "price": "$199",
+    "imageUrl": "/images/totepack.png"
+  },
+  {
+    "id": 3,
+    "name": "Phone Case + Wallet",
+    "price": "$89",
+    "imageUrl": "/images/phone-case.png"
+  }
+]
