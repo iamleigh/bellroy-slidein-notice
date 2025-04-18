@@ -155,11 +155,11 @@ slideInNoticeView config model =
             , Html.Attributes.attribute "aria-live" "assertive"
             , Html.Attributes.tabindex -1
             ]
-            [ div [ class "bellroy-notice__container" ]
+            [ dismissButton
+            , div [ class "bellroy-notice__container" ]
                 [ imgElement "/images/bellroy-card.png" "Gift card wrapped with ribbon" [ "bellroy-notice__img--bottom" ]
                 , div [ class "bellroy-notice__content" ]
-                    [ dismissButton
-                    , noticeTitle config.title
+                    [ noticeTitle config.title
                     , noticeForm config model
                     , maybePrivacyText config.privacyText
                     ]
