@@ -13,6 +13,7 @@ const header = require("gulp-header");
 const mode = require("gulp-mode")();
 const replace = require("gulp-replace");
 const stylelint = require('gulp-stylelint');
+const imagemin = require("gulp-imagemin");
 
 /**
  * Paths & Files
@@ -25,6 +26,7 @@ srcInput.css = "./src/assets/styles/";
 
 const srcOutput = {};
 srcOutput.css = "./public/";
+srcOutput.img = "./public/images/";
 
 /**
  * Copyright Banner
@@ -93,8 +95,18 @@ gulp.task("styles", function () {
  */
 gulp.task("images", function () {
 	return gulp
-		.src(srcInput.img + "**/*")
-		.pipe(gulp.dest("public/images"))
+		.src(srcInput.img + "**/*.{png,jpg,jpeg,svg,gif}", { buffer: true })
+		.pipe(mode.production(imagemin([
+			imagemin.optipng({ optimizationLevel: 5 }),
+			imagemin.mozjpeg({ quality: 80, progressive: true }),
+			imagemin.svgo({
+				plugins: [
+					{ removeViewBox: false },
+					{ cleanupIDs: false }
+				]
+			})
+		])))
+		.pipe(gulp.dest(srcOutput.img))
 		.on("finish", function () {
             console.log("🖼 Finished copying images.");
         });
@@ -113,7 +125,7 @@ gulp.task("clean", async function () {
 
 	const deletedPaths = await del.deleteAsync([
 		srcOutput.css + '*.css',
-		srcOutput.img + '**/*',
+		srcOutput.img,
 	]);
 	console.log('✅ Deleted:', deletedPaths);
 });
