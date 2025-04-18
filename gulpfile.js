@@ -12,6 +12,7 @@ const autoprefixer = require('autoprefixer');
 const header = require("gulp-header");
 const mode = require("gulp-mode")();
 const replace = require("gulp-replace");
+const stylelint = require('gulp-stylelint');
 
 /**
  * Paths & Files
@@ -53,7 +54,12 @@ gulp.task("styles", function () {
 	return (
 		gulp
 			.src(srcInput.css + "**/*.scss")
-			// Check if files have an error
+			.pipe(stylelint({
+				reporters: [{
+					formatter: 'string',
+					console: true
+				}]
+			}))
 			.pipe(sass({ outputStyle: "expanded" }).on("error", sass.logError))
 			.pipe(postcss([autoprefixer(browsersList)]))
 			.pipe(header(banner))
