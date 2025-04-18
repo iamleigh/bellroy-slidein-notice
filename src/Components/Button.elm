@@ -70,9 +70,9 @@ uiButton config =
                     []
     in
     button
-        ( [ class (String.join " " config.classes)
-          , onClick config.onClick
-          ]
-          ++ extraAttributes
+        ([ class (String.join " " config.classes)
+         , onClick config.onClick
+         ]
+            ++ extraAttributes
         )
         contents

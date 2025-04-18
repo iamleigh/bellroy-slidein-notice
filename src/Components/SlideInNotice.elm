@@ -10,7 +10,7 @@ module Components.SlideInNotice exposing
 import Components.Button as Button
 import Components.Input as Input
 import Html exposing (Html, div, span, text)
-import Html.Attributes exposing (class)
+import Html.Attributes exposing (attribute, class, tabindex)
 import Html.Events exposing (onClick)
 import Process
 import Task
@@ -46,7 +46,7 @@ slideInNoticeInit =
     { visible = False
     , email = ""
     , animating = False
-    , removed = True -- start fully removed
+    , removed = True -- Start fully removed
     , animationClass = ""
     }
 
@@ -56,11 +56,11 @@ slideInNoticeInit =
 
 
 type Msg
-    = DismissNotice
+    = ShowNotice
+    | DismissNotice
+    | FinishExitAnimation
     | UpdateEmail String
     | SubmitEmail
-    | ShowNotice
-    | FinishExitAnimation
 
 
 slideInNoticeUpdate : Msg -> SlideInNoticeModel -> ( SlideInNoticeModel, Cmd Msg )
@@ -114,11 +114,13 @@ slideInNoticeView : Config -> SlideInNoticeModel -> Html Msg
 slideInNoticeView config model =
     if model.removed then
         Html.text ""
+
     else
-        div [ class ("bellroy-notice slide-in-notice " ++ model.animationClass)
-            , Html.Attributes.attribute "role" "alert"
-            , Html.Attributes.attribute "aria-live" "assertive"
-            , Html.Attributes.tabindex -1
+        div
+            [ class ("slide-in-notice " ++ model.animationClass)
+            , attribute "role" "alert"
+            , attribute "aria-live" "assertive"
+            , tabindex -1
             ]
             [ dismissButton
             , noticeTitle config.title

@@ -1,6 +1,6 @@
 module Layouts.Body exposing (view)
 
-import Html exposing (Html, div, button, p, text)
+import Html exposing (Html, button, div, p, text)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
 
