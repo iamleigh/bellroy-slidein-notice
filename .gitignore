@@ -3,6 +3,7 @@
 
 # Ignore Elm build stuff
 /elm-stuff
+/review/elm-stuff
 
 # Ignore built distribution files
 /public

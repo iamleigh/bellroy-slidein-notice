@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	"dev": "npm run build && npm-run-all --parallel dev:elm dev:css",
-	"dev:elm": "npx elm-live src/Main.elm --dir=public --open -- --output=public/main.js",
+    "dev": "npm run build && npm-run-all --parallel dev:elm dev:css",
+    "dev:elm": "npx elm-live src/Main.elm --dir=public --open -- --output=public/main.js",
     "dev:css": "NODE_NO_WARNINGS=1 gulp watch",
-	"build": "NODE_NO_WARNINGS=1 gulp build",
-	"prod": "npm run build -- --production && npx elm make src/Main.elm --output=public/main.js",
+    "build": "NODE_NO_WARNINGS=1 gulp build",
+    "prod": "npm run build -- --production && npx elm make src/Main.elm --output=public/main.js",
     "format": "npm run format:elm && npm run format:css",
     "format:elm": "npx elm-format src/ --yes",
-    "format:css": "prettier --write \"src/assets/styles/**/*.scss\""
+    "format:css": "prettier --write \"src/assets/styles/**/*.scss\"",
+    "lint": "npx elm-review"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "del": "^8.0.0",
     "elm": "^0.19.1-6",
     "elm-format": "^0.8.7",
+    "elm-review": "^2.13.2",
     "gulp": "^5.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-header": "^2.0.9",
