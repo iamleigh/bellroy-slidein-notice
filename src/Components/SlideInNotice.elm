@@ -63,6 +63,7 @@ type Msg
     = ShowNotice
     | DismissNotice
     | FinishExitAnimation
+    | FinishSuccessfulSubmit
     | UpdateEmail String
     | SubmitEmail
 
@@ -104,10 +105,20 @@ slideInNoticeUpdate msg model =
         SubmitEmail ->
             if isValidEmail model.email then
                 ( { model | loading = True, hasError = False }
-                , Task.perform (\_ -> DismissNotice) (Process.sleep 1500)
+                , Task.perform (\_ -> FinishSuccessfulSubmit) (Process.sleep 1500)
                 )
             else
                 ( { model | hasError = True }, Cmd.none )
+
+        FinishSuccessfulSubmit ->
+            ( { model
+                | email = ""
+                , animating = True
+                , loading = False
+                , animationClass = "animate__animated animate__slideOutDown"
+            }
+            , delayFinishExit
+            )
 
 
 delayFinishExit : Cmd Msg
