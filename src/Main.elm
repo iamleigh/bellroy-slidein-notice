@@ -38,10 +38,11 @@ slideInNoticeConfig =
     , placeholder = "Enter your email address"
     , submitText = "SUBMIT"
     , privacyText =
-        [ text "You're consenting to our "
-        , span [ class "privacy-link" ] [ text "privacy policy" ]
-        , text " and signing up to receive emails which you can opt out of at any time."
-        ]
+        Just
+            [ text "You're consenting to our "
+            , span [ class "privacy-link" ] [ text "privacy policy" ]
+            , text " and signing up to receive emails which you can opt out of at any time."
+            ]
     }
 
 

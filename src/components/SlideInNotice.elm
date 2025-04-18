@@ -21,7 +21,7 @@ type alias Config =
     { title : String
     , placeholder : String
     , submitText : String
-    , privacyText : List (Html Msg)
+    , privacyText : Maybe (List (Html Msg))
     }
 
 
@@ -104,8 +104,13 @@ slideInNoticeView config model =
                     }
                 ]
 
-            -- Privacy note
-            , div [ class "privacy-text" ] config.privacyText
+            -- Privacy note (only if it exists)
+            , case config.privacyText of
+                Just privacyContent ->
+                    div [ class "privacy-text" ] privacyContent
+
+                Nothing ->
+                    Html.text ""
             ]
 
     else
