@@ -1,7 +1,7 @@
 module Components.SlideInNotice exposing
-    ( SlideInNoticeModel
-    , Config
+    ( Config
     , Msg(..)
+    , SlideInNoticeModel
     , slideInNoticeInit
     , slideInNoticeUpdate
     , slideInNoticeView
@@ -12,7 +12,9 @@ import Html.Attributes exposing (class, placeholder, type_, value)
 import Html.Events exposing (onClick, onInput)
 
 
+
 -- CONFIG
+
 
 type alias Config =
     { title : String
@@ -22,7 +24,9 @@ type alias Config =
     }
 
 
+
 -- MODEL
+
 
 type alias SlideInNoticeModel =
     { visible : Bool
@@ -37,7 +41,9 @@ slideInNoticeInit =
     }
 
 
+
 -- UPDATE
+
 
 type Msg
     = DismissNotice
@@ -59,7 +65,9 @@ slideInNoticeUpdate msg model =
             { model | email = "" }
 
 
+
 -- VIEW
+
 
 slideInNoticeView : Config -> SlideInNoticeModel -> Html Msg
 slideInNoticeView config model =
@@ -68,10 +76,10 @@ slideInNoticeView config model =
             [ -- Dismiss button
               button [ class "dismiss-button", onClick DismissNotice ] [ text "×" ]
 
-              -- Title
+            -- Title
             , div [ class "notice-title" ] [ text config.title ]
 
-              -- Input and submit
+            -- Input and submit
             , div [ class "notice-form" ]
                 [ input
                     [ class "email-input"
@@ -84,8 +92,9 @@ slideInNoticeView config model =
                 , button [ class "submit-button", onClick SubmitEmail ] [ text config.submitText ]
                 ]
 
-              -- Privacy note
+            -- Privacy note
             , div [ class "privacy-text" ] config.privacyText
             ]
+
     else
         Html.text ""

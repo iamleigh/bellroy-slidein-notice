@@ -1,12 +1,14 @@
 module Main exposing (main)
 
 import Browser
+import Components.SlideInNotice exposing (Config, Msg(..), SlideInNoticeModel, slideInNoticeInit, slideInNoticeUpdate, slideInNoticeView)
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class)
-import Components.SlideInNotice exposing (SlideInNoticeModel, Config, Msg(..), slideInNoticeInit, slideInNoticeUpdate, slideInNoticeView)
+
 
 
 -- MODEL
+
 
 type alias Model =
     SlideInNoticeModel
@@ -17,14 +19,18 @@ init =
     slideInNoticeInit
 
 
+
 -- UPDATE
+
 
 update : Msg -> Model -> Model
 update msg model =
     slideInNoticeUpdate msg model
 
 
+
 -- VIEW
+
 
 slideInNoticeConfig : Config
 slideInNoticeConfig =
@@ -46,7 +52,9 @@ view model =
         ]
 
 
+
 -- MAIN
+
 
 main : Program () Model Msg
 main =
