@@ -13,7 +13,6 @@ const header = require("gulp-header");
 const mode = require("gulp-mode")();
 const replace = require("gulp-replace");
 const stylelint = require('gulp-stylelint');
-const imagemin = require("gulp-imagemin");
 
 /**
  * Paths & Files
@@ -96,19 +95,26 @@ gulp.task("styles", function () {
 gulp.task("images", function () {
 	return gulp
 		.src(srcInput.img + "**/*.{png,jpg,jpeg,svg,gif}", { buffer: true })
-		.pipe(mode.production(imagemin([
-			imagemin.optipng({ optimizationLevel: 5 }),
-			imagemin.mozjpeg({ quality: 80, progressive: true }),
-			imagemin.svgo({
-				plugins: [
-					{ removeViewBox: false },
-					{ cleanupIDs: false }
-				]
-			})
-		])))
 		.pipe(gulp.dest(srcOutput.img))
-		.on("finish", function () {
+		.on("finish", async function () {
             console.log("🖼 Finished copying images.");
+
+			if (mode.production()) {
+				const { default: imagemin, optipng, mozjpeg, svgo } = await import('gulp-imagemin');
+
+				imagemin([
+					optipng({ optimizationLevel: 5 }),
+					mozjpeg({ quality: 80, progressive: true }),
+					svgo({
+						plugins: [
+							{ removeViewBox: false },
+							{ cleanupIDs: false }
+						]
+					})
+				]);
+
+				console.log("✅ Finished compressing files.");
+			}
         });
 });
 
