@@ -9,8 +9,8 @@ module Components.SlideInNotice exposing
 
 import Components.Button as Button
 import Components.Input as Input
-import Html exposing (Html, div, span, text)
-import Html.Attributes exposing (attribute, class, tabindex)
+import Html exposing (Html, div, span, text, img)
+import Html.Attributes exposing (attribute, class, tabindex, alt, src)
 import Html.Events exposing (onClick)
 import Process
 import Task
@@ -114,19 +114,37 @@ slideInNoticeView : Config -> SlideInNoticeModel -> Html Msg
 slideInNoticeView config model =
     if model.removed then
         Html.text ""
-
     else
         div
             [ class ("bellroy-notice " ++ model.animationClass)
-            , attribute "role" "alert"
-            , attribute "aria-live" "assertive"
-            , tabindex -1
+            , Html.Attributes.attribute "role" "alert"
+            , Html.Attributes.attribute "aria-live" "assertive"
+            , Html.Attributes.tabindex -1
             ]
-            [ dismissButton
-            , noticeTitle config.title
-            , noticeForm config model
-            , maybePrivacyText config.privacyText
+            [ div [ class "bellroy-notice__container" ]
+                [ imgElement "/images/bellroy-card.png" "Gift card wrapped with ribbon" [ "bellroy-notice__img--bottom" ]
+                , div [ class "bellroy-notice__content" ]
+                    [ dismissButton
+                    , noticeTitle config.title
+                    , noticeForm config model
+                    , maybePrivacyText config.privacyText
+                    ]
+                , imgElement "/images/bellroy-magnets.png" "Box with magnets and pins" [ "bellroy-notice__img--top" ]
+                ]
             ]
+
+
+
+
+imgElement : String -> String -> List String -> Html msg
+imgElement srcUrl altText additionalClasses =
+    Html.img
+        [ src srcUrl
+        , alt altText
+        , class ("bellroy-notice__img " ++ String.join " " additionalClasses)
+        , Html.Attributes.attribute "aria-hidden" "true"
+        ]
+        []
 
 
 dismissButton : Html Msg
