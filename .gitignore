@@ -1,0 +1,8 @@
+# Ignore node modules
+/node_modules
+
+# Ignore Elm build stuff
+/elm-stuff
+
+# Ignore built distribution files
+/dist
