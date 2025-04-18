@@ -83,7 +83,10 @@ slideInNoticeUpdate msg model =
 
         DismissNotice ->
             ( { model
-                | animating = True
+                | email = ""
+                , hasError = False
+                , loading = False
+                , animating = True
                 , animationClass = "animate__animated animate__slideOutDown"
               }
             , delayFinishExit
