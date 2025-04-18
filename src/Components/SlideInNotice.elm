@@ -117,7 +117,7 @@ slideInNoticeView config model =
 
     else
         div
-            [ class ("slide-in-notice " ++ model.animationClass)
+            [ class ("bellroy-notice " ++ model.animationClass)
             , attribute "role" "alert"
             , attribute "aria-live" "assertive"
             , tabindex -1
@@ -142,19 +142,19 @@ dismissButton =
 
 noticeTitle : String -> Html Msg
 noticeTitle titleText =
-    div [ class "notice-title" ]
+    div [ class "bellroy-notice__title" ]
         [ text titleText ]
 
 
 noticeForm : Config -> SlideInNoticeModel -> Html Msg
 noticeForm config model =
-    div [ class "notice-form" ]
+    div [ class "bellroy-form" ]
         [ Input.input
             { inputType = "email"
             , placeholderText = config.placeholder
             , value = model.email
             , onInput = UpdateEmail
-            , classes = [ "email-input" ]
+            , classes = [ "" ]
             }
         , Button.uiButton
             { label = config.submitText
@@ -170,7 +170,7 @@ maybePrivacyText : Maybe (List (Html Msg)) -> Html Msg
 maybePrivacyText maybePrivacy =
     case maybePrivacy of
         Just content ->
-            div [ class "privacy-text" ] content
+            div [ class "bellroy-notice__copy" ] content
 
         Nothing ->
             Html.text ""
