@@ -5,7 +5,9 @@ import Html.Attributes exposing (class, disabled, placeholder, type_, value)
 import Html.Events exposing (onInput)
 
 
+
 -- TYPES
+
 
 type alias InputConfig msg =
     { inputType : String
@@ -17,7 +19,9 @@ type alias InputConfig msg =
     }
 
 
+
 -- VIEW
+
 
 input : InputConfig msg -> Html msg
 input config =

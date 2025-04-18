@@ -36,9 +36,15 @@ uiButton config =
             case maybeIconName of
                 Just name ->
                     let
-                        baseClass = "fa-solid fa-" ++ name
-                        spinClass = if name == "spinner" then "fa-spin" else ""
+                        baseClass =
+                            "fa-solid fa-" ++ name
 
+                        spinClass =
+                            if name == "spinner" then
+                                "fa-spin"
+
+                            else
+                                ""
                     in
                     span
                         [ class (String.join " " [ baseClass, spinClass ])
@@ -95,6 +101,11 @@ uiButton config =
         ([ class (String.join " " baseClasses)
          , onClick config.onClick
          ]
-            ++ (if config.disabled then [ Html.Attributes.disabled True ] else [])
+            ++ (if config.disabled then
+                    [ Html.Attributes.disabled True ]
+
+                else
+                    []
+               )
         )
         contents

@@ -1,4 +1,4 @@
-@use '../_utils/utils' as *;
+@use "../_utils/utils" as *;
 
 /// -----------------------------------------------------------------------------
 /// 🟢 Products
@@ -7,7 +7,7 @@
 ///
 /// @author Leighton Quito (iamleigh.com)
 /// -----------------------------------------------------------------------------
-@include block('products') {
+@include block("products") {
 	display: flex;
 	flex-flow: row wrap;
 	margin: 0 -10px;
@@ -18,7 +18,7 @@
 		margin-bottom: 30px;
 	}
 
-	@include element('item') {
+	@include element("item") {
 		display: block;
 		flex: 0 0 100%;
 		padding: 0 10px;

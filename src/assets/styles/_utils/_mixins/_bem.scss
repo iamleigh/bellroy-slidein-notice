@@ -100,8 +100,8 @@ $bem-log: ();
 	@if map.get($bem-log, $current-block, elements) ==null {
 		$current-elements: (
 			$current-block: (
-				elements: (),
-			),
+					elements: (),
+				),
 		);
 		$current-elements: map.merge($bem-log, $current-elements);
 	}
@@ -121,8 +121,8 @@ $bem-log: ();
 
 		$updated: (
 			$element: (
-				modifiers: (),
-			),
+					modifiers: (),
+				),
 		);
 
 		$current-elements: map.merge($current-elements, $updated);

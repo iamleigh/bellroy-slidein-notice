@@ -15,7 +15,7 @@ view product =
                 [ p [ class "bellroy-product__name" ]
                     [ text product.name ]
                 , p [ class "bellroy-product__price" ]
-                    [ text (product.price) ]
+                    [ text product.price ]
                 ]
             ]
         ]
@@ -36,5 +36,6 @@ imageSection product =
         [ baseImage
         , span [ class "bellroy-product__tag" ] [ text "Value Set" ]
         ]
+
     else
         [ baseImage ]

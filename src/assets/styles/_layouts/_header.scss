@@ -1,4 +1,4 @@
-@use '../_utils/utils' as *;
+@use "../_utils/utils" as *;
 
 /// -----------------------------------------------------------------------------
 /// 🟢 Header
@@ -15,8 +15,12 @@
 		width: auto;
 		max-width: 100%;
 		height: auto;
-		max-height: 150px;
+		max-height: 100px;
 		display: block;
 		margin: 0 auto;
+
+		@include bp(min-width, md) {
+			max-height: 150px;
+		}
 	}
 }

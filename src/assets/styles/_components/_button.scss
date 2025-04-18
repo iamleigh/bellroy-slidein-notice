@@ -1,4 +1,4 @@
-@use '../_utils/utils' as *;
+@use "../_utils/utils" as *;
 
 /// -----------------------------------------------------------------------------
 /// 🟢 Button
@@ -38,7 +38,9 @@
 
 	&:focus {
 		background: $color-primary;
-		box-shadow: 0 0 0 1px #FFF, 0 0 0 3px $color-primary;
+		box-shadow:
+			0 0 0 1px #fff,
+			0 0 0 3px $color-primary;
 	}
 
 	&:disabled {
@@ -62,7 +64,9 @@
 
 		&:focus {
 			background: $color-neutral-100;
-			box-shadow: 0 0 0 2px #FFF, 0 0 0 4px $color-neutral-70;
+			box-shadow:
+				0 0 0 2px #fff,
+				0 0 0 4px $color-neutral-70;
 		}
 	}
 }

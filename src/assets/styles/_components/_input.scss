@@ -1,4 +1,4 @@
-@use '../_utils/utils' as *;
+@use "../_utils/utils" as *;
 
 /// -----------------------------------------------------------------------------
 /// 🟢 Input
@@ -7,7 +7,7 @@
 ///
 /// @author Leighton Quito (iamleigh.com)
 /// -----------------------------------------------------------------------------
-@include block('input') {
+@include block("input") {
 	flex: 1;
 	padding: 12px;
 	border: 1px solid $color-neutral-70;
@@ -24,6 +24,8 @@
 
 	&:focus {
 		border-color: $color-neutral-100;
-		box-shadow: 0 0 0 1px #FFF, 0 0 0 3px $color-primary;
+		box-shadow:
+			0 0 0 1px #fff,
+			0 0 0 3px $color-primary;
 	}
 }

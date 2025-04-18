@@ -9,8 +9,8 @@ module Components.SlideInNotice exposing
 
 import Components.Button as Button
 import Components.Input as Input
-import Html exposing (Html, div, span, text, img)
-import Html.Attributes exposing (attribute, class, tabindex, alt, src)
+import Html exposing (Html, div, img, span, text)
+import Html.Attributes exposing (alt, attribute, class, src, tabindex)
 import Html.Events exposing (onClick)
 import Process
 import Task
@@ -110,12 +110,14 @@ slideInNoticeUpdate msg model =
 
         SubmitEmail ->
             let
-                cleanedEmail = trim model.email
+                cleanedEmail =
+                    trim model.email
             in
             if isValid cleanedEmail then
                 ( { model | loading = True, hasError = False, email = cleanedEmail }
                 , Task.perform (\_ -> FinishSuccessfulSubmit) (Process.sleep 1500)
                 )
+
             else
                 ( { model | hasError = True }, Cmd.none )
 
@@ -125,7 +127,7 @@ slideInNoticeUpdate msg model =
                 , animating = True
                 , loading = False
                 , animationClass = Utils.Animations.slideOut
-            }
+              }
             , delayFinishExit
             )
 
@@ -148,6 +150,7 @@ slideInNoticeView : Config -> SlideInNoticeModel -> Html Msg
 slideInNoticeView config model =
     if model.removed then
         Html.text ""
+
     else
         div
             [ class ("bellroy-notice " ++ model.animationClass)
@@ -166,8 +169,6 @@ slideInNoticeView config model =
                 , imgElement "/images/bellroy-magnets.png" "Box with magnets and pins" [ "bellroy-notice__img--top" ]
                 ]
             ]
-
-
 
 
 imgElement : String -> String -> List String -> Html msg
@@ -208,12 +209,28 @@ noticeForm config model =
                 , placeholderText = config.placeholder
                 , value = model.email
                 , onInput = UpdateEmail
-                , classes = [ if model.hasError then "error" else "" ]
+                , classes =
+                    [ if model.hasError then
+                        "error"
+
+                      else
+                        ""
+                    ]
                 , disabled = model.loading
                 }
             , Button.uiButton
-                { label = if model.loading then "Subscribing" else config.submitText
-                , iconName = if model.loading then Just "spinner" else Nothing
+                { label =
+                    if model.loading then
+                        "Subscribing"
+
+                    else
+                        config.submitText
+                , iconName =
+                    if model.loading then
+                        Just "spinner"
+
+                    else
+                        Nothing
                 , iconPosition = Nothing
                 , onClick = SubmitEmail
                 , classes = [ "bellroy-button" ]
@@ -229,6 +246,7 @@ maybeErrorMessage model =
     if model.hasError then
         div [ class "bellroy-form__error", attribute "role" "alert" ]
             [ text "The email entered is not valid. Please try again." ]
+
     else
         Html.text ""
 

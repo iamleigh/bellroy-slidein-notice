@@ -1,4 +1,4 @@
-@use '../_utils/utils' as *;
+@use "../_utils/utils" as *;
 
 /// -----------------------------------------------------------------------------
 /// 🟢 Product
@@ -7,7 +7,7 @@
 ///
 /// @author Leighton Quito (iamleigh.com)
 /// -----------------------------------------------------------------------------
-@include block('product') {
+@include block("product") {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;
@@ -16,7 +16,7 @@
 		margin-bottom: 0;
 	}
 
-	@include element('image') {
+	@include element("image") {
 		width: 100%;
 		position: relative;
 		overflow: hidden;
@@ -35,7 +35,7 @@
 		}
 	}
 
-	@include element('tag') {
+	@include element("tag") {
 		position: absolute;
 		z-index: 1;
 		bottom: 10px;
@@ -49,7 +49,7 @@
 		line-height: $font-size-body-sm + 2px;
 	}
 
-	@include element('name') {
+	@include element("name") {
 		margin: 0;
 		color: $color-neutral-10;
 		font-weight: $font-weight-lg;
@@ -57,7 +57,7 @@
 		line-height: $font-height-heading-three;
 	}
 
-	@include element('price') {
+	@include element("price") {
 		margin: 0;
 		color: $color-primary;
 		font-weight: $font-weight-lg;
@@ -65,7 +65,7 @@
 		line-height: 1;
 	}
 
-	@include element('details') {
+	@include element("details") {
 		flex: 0 0 auto;
 		margin: 8px 0 0;
 	}

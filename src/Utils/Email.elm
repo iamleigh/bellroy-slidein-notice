@@ -1,5 +1,6 @@
 module Utils.Email exposing (isValid)
 
+
 isValid : String -> Bool
 isValid email =
     -- very basic validation for now

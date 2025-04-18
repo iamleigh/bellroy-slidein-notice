@@ -1,17 +1,17 @@
-module Main exposing (init, main, update)
+module Main exposing (Msg(..), init, main, update)
 
 import Browser
 import Browser.Events
 import Components.SlideInNotice exposing (Config, Msg(..), SlideInNoticeModel, slideInNoticeInit, slideInNoticeUpdate, slideInNoticeView)
 import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (class, id)
+import Http
 import Json.Decode as Decode
 import Layouts.Body as Body
 import Layouts.Header as Header
 import Models.Product exposing (Product)
 import Process
 import Task
-import Http
 
 
 
@@ -92,6 +92,7 @@ update msg model =
                 ( { model | slideInNotice = updatedSlideIn }
                 , Cmd.map SlideInNoticeMsg slideInCmd
                 )
+
             else
                 ( model, Cmd.none )
 
