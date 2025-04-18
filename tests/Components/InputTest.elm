@@ -1,28 +1,53 @@
 module Components.InputTest exposing (all)
 
-import Components.Input exposing (InputConfig, input)
+import Components.Input exposing (input)
 import Expect
 import Test exposing (..)
+import Test.Html.Query as Query
+import Test.Html.Selector exposing (class, tag, disabled)
 
 
 all : Test
 all =
-    describe "Input Component"
-        [ test "input renders without crashing" <|
+    describe "Components.Input"
+        [ test "renders enabled input with correct classes" <|
             \_ ->
                 let
-                    config : InputConfig Never
-                    config =
-                        { inputType = "email"
-                        , placeholderText = "Enter your email"
-                        , value = "test@example.com"
-                        , onInput = \_ -> Debug.todo "no-op"
-                        , classes = [ "email-input" ]
-                        }
-
-                    rendered =
-                        input config
+                    view =
+                        input
+                            { inputType = "email"
+                            , placeholderText = "Enter your email"
+                            , value = "test@example.com"
+                            , onInput = identity
+                            , classes = [ "custom-input" ]
+                            , disabled = False
+                            }
                 in
-                -- If this compiles, it's valid Elm Html
-                Expect.pass
+                Query.fromHtml view
+                    |> Query.has
+                        [ tag "input"
+                        , class "bellroy-input"
+                        , class "custom-input"
+                        , disabled False
+                        ]
+
+        , test "renders disabled input" <|
+            \_ ->
+                let
+                    view =
+                        input
+                            { inputType = "email"
+                            , placeholderText = "Disabled input"
+                            , value = "disabled"
+                            , onInput = identity
+                            , classes = []
+                            , disabled = True
+                            }
+                in
+                Query.fromHtml view
+                    |> Query.has
+                        [ tag "input"
+                        , class "bellroy-input"
+                        , disabled True
+                        ]
         ]

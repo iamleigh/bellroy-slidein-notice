@@ -1,38 +1,77 @@
 module MainTest exposing (all)
 
-import Components.SlideInNotice exposing (Msg(..))
+import Components.SlideInNotice as SlideInNotice exposing (slideInNoticeInit)
 import Expect
-import Main exposing (init, update)
+import Html.Attributes as Attr
+import Http
+import Main exposing (Msg(..), update, init)
+import Models.Product exposing (Product)
 import Test exposing (..)
+
+
+type alias DummyFlags =
+    ()
+
+
+initialModel =
+    { slideInNotice = slideInNoticeInit
+    , products = []
+    }
 
 
 all : Test
 all =
     describe "Main.elm"
-        [ test "Initial model should be visible with empty email" <|
-            \_ ->
-                Expect.equal
-                    { visible = True, email = "" }
-                    init
-        , test "DismissNotice hides the slide-in notice" <|
-            \_ ->
-                let
-                    updatedModel =
-                        update DismissNotice { visible = True, email = "someone@example.com" }
-                in
-                Expect.equal False updatedModel.visible
-        , test "UpdateEmail changes the email field" <|
-            \_ ->
-                let
-                    updatedModel =
-                        update (UpdateEmail "new@example.com") { visible = True, email = "" }
-                in
-                Expect.equal "new@example.com" updatedModel.email
-        , test "SubmitEmail clears the email field" <|
-            \_ ->
-                let
-                    updatedModel =
-                        update SubmitEmail { visible = True, email = "hello@domain.com" }
-                in
-                Expect.equal "" updatedModel.email
+        [ describe "update"
+            [ test "SlideInNoticeMsg updates SlideInNoticeModel" <|
+                \_ ->
+                    let
+                        ( updatedModel, _ ) =
+                            update (SlideInNoticeMsg SlideInNotice.ShowNotice) initialModel
+                    in
+                    Expect.equal True updatedModel.slideInNotice.visible
+
+            , test "FetchProducts Ok updates products" <|
+                \_ ->
+                    let
+                        products =
+                            [ { name = "Slim Sleeve", price = "79.00", highlight = False, image = "/images/slim.jpg" } ]
+
+                        ( updatedModel, _ ) =
+                            update (FetchProducts (Ok products)) initialModel
+                    in
+                    Expect.equal products updatedModel.products
+
+            , test "FetchProducts Err keeps products empty" <|
+                \_ ->
+                    let
+                        ( updatedModel, _ ) =
+                            update (FetchProducts (Err Http.Timeout)) initialModel
+                    in
+                    Expect.equal [] updatedModel.products
+
+            , test "KeyPressed Escape triggers DismissNotice" <|
+                \_ ->
+                    let
+                        ( updatedModel, _ ) =
+                            update (KeyPressed "Escape") initialModel
+                    in
+                    Expect.equal False updatedModel.slideInNotice.visible
+
+            , test "KeyPressed other key does nothing" <|
+                \_ ->
+                    let
+                        ( updatedModel, _ ) =
+                            update (KeyPressed "Enter") initialModel
+                    in
+                    Expect.equal initialModel updatedModel
+            ]
+        , describe "init"
+            [ test "Initial model starts with empty products and hidden notice" <|
+                \_ ->
+                    let
+                        ( model, _ ) = init ()
+                    in
+                    Expect.equal [] model.products
+            ]
         ]
