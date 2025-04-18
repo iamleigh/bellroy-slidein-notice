@@ -58,9 +58,21 @@ uiButton config =
 
                 ( Nothing, _ ) ->
                     [ labelView ]
+
+        extraAttributes =
+            case ( config.iconName, config.iconPosition ) of
+                ( Just _, Nothing ) ->
+                    -- Icon only → add aria-label
+                    [ attribute "aria-label" config.label ]
+
+                _ ->
+                    -- Normal button → no extra aria attributes
+                    []
     in
     button
-        [ class (String.join " " config.classes)
-        , onClick config.onClick
-        ]
+        ( [ class (String.join " " config.classes)
+          , onClick config.onClick
+          ]
+          ++ extraAttributes
+        )
         contents
