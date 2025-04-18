@@ -1,20 +1,23 @@
 [
   {
     "id": 1,
-    "name": "Slim Sleeve Wallet",
-    "price": "$79",
-    "imageUrl": "/images/wallet.png"
+    "name": "Venture Sling 6L",
+    "price": "$129",
+    "highlight": false,
+    "image": "/images/bellroy-product-sling.png"
   },
   {
     "id": 2,
-    "name": "Tokyo Totepack",
-    "price": "$199",
-    "imageUrl": "/images/totepack.png"
+    "name": "Tech Kit",
+    "price": "$59",
+    "highlight": false,
+    "image": "/images/bellroy-product-tech-kit.png"
   },
   {
     "id": 3,
-    "name": "Phone Case + Wallet",
-    "price": "$89",
-    "imageUrl": "/images/phone-case.png"
+    "name": "Pack Well Travel Set",
+    "price": "$79",
+    "highlight": true,
+    "image": "/images/bellroy-product-travel-set.png"
   }
 ]
