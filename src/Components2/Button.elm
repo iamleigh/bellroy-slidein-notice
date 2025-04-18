@@ -5,6 +5,7 @@ import Html.Attributes exposing (attribute, class)
 import Html.Events exposing (onClick)
 
 
+
 -- TYPES
 
 
@@ -20,6 +21,7 @@ type alias ButtonConfig msg =
     , onClick : msg
     , classes : List String
     }
+
 
 
 -- VIEW
