@@ -35,7 +35,7 @@ showAfterDelay =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( slideInNoticeUpdate msg model, Cmd.none )
+    slideInNoticeUpdate msg model
 
 
 
@@ -61,7 +61,7 @@ view model =
     div [ id "app", class "bellroy-ui" ]
         [ div [ class "bellroy-page" ]
             [ Header.view
-            , Body.view ShowNotice
+            , Body.view ShowNotice model.visible
             ]
         , div [ class "bellroy-notice" ]
             [ slideInNoticeView slideInNoticeConfig model ]

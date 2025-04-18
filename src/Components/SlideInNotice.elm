@@ -11,6 +11,9 @@ import Components.Button as Button
 import Components.Input as Input
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class)
+import Html.Events exposing (onClick)
+import Process
+import Task
 
 
 
@@ -55,42 +58,48 @@ type Msg
     | UpdateEmail String
     | SubmitEmail
     | ShowNotice
-    | StartExitAnimation
     | FinishExitAnimation
 
 
-slideInNoticeUpdate : Msg -> SlideInNoticeModel -> SlideInNoticeModel
+slideInNoticeUpdate : Msg -> SlideInNoticeModel -> ( SlideInNoticeModel, Cmd Msg )
 slideInNoticeUpdate msg model =
     case msg of
         ShowNotice ->
-            { model
+            ( { model
                 | visible = True
                 , animating = True
                 , animationClass = "animate__animated animate__slideInUp"
-            }
+              }
+            , Cmd.none
+            )
 
         DismissNotice ->
-            { model
+            ( { model
                 | animating = True
                 , animationClass = "animate__animated animate__slideOutDown"
-            }
-
-        StartExitAnimation ->
-            model
+              }
+            , delayFinishExit
+            )
 
         FinishExitAnimation ->
-            { model
+            ( { model
                 | visible = False
                 , animating = False
                 , animationClass = ""
-            }
+              }
+            , Cmd.none
+            )
 
         UpdateEmail newEmail ->
-            { model | email = newEmail }
+            ( { model | email = newEmail }, Cmd.none )
 
         SubmitEmail ->
-            -- You could later do something smarter, like send the email somewhere
-            { model | email = "" }
+            ( { model | email = "" }, Cmd.none )
+
+
+delayFinishExit : Cmd Msg
+delayFinishExit =
+    Task.perform (\_ -> FinishExitAnimation) (Process.sleep 500)
 
 
 
@@ -101,44 +110,57 @@ slideInNoticeView : Config -> SlideInNoticeModel -> Html Msg
 slideInNoticeView config model =
     if model.visible then
         div [ class ("slide-in-notice " ++ model.animationClass) ]
-            [ -- Dismiss button
-              Button.uiButton
-                { label = "Close Notice"
-                , iconName = Just "xmark"
-                , iconPosition = Nothing
-                , onClick = DismissNotice
-                , classes = [ "dismiss-button" ]
-                }
-
-            -- Title
-            , div [ class "notice-title" ] [ text config.title ]
-
-            -- Input and submit
-            , div [ class "notice-form" ]
-                [ Input.input
-                    { inputType = "email"
-                    , placeholderText = config.placeholder
-                    , value = model.email
-                    , onInput = UpdateEmail
-                    , classes = [ "email-input" ]
-                    }
-                , Button.uiButton
-                    { label = config.submitText
-                    , iconName = Nothing
-                    , iconPosition = Nothing
-                    , onClick = SubmitEmail
-                    , classes = [ "submit-button" ]
-                    }
-                ]
-
-            -- Privacy note (only if it exists)
-            , case config.privacyText of
-                Just privacyContent ->
-                    div [ class "privacy-text" ] privacyContent
-
-                Nothing ->
-                    Html.text ""
+            [ dismissButton
+            , noticeTitle config.title
+            , noticeForm config model
+            , maybePrivacyText config.privacyText
             ]
-
     else
         Html.text ""
+
+
+dismissButton : Html Msg
+dismissButton =
+    Button.uiButton
+        { label = "Close Notice"
+        , iconName = Just "xmark"
+        , iconPosition = Nothing
+        , onClick = DismissNotice
+        , classes = [ "dismiss-button" ]
+        }
+
+
+noticeTitle : String -> Html Msg
+noticeTitle titleText =
+    div [ class "notice-title" ]
+        [ text titleText ]
+
+
+noticeForm : Config -> SlideInNoticeModel -> Html Msg
+noticeForm config model =
+    div [ class "notice-form" ]
+        [ Input.input
+            { inputType = "email"
+            , placeholderText = config.placeholder
+            , value = model.email
+            , onInput = UpdateEmail
+            , classes = [ "email-input" ]
+            }
+        , Button.uiButton
+            { label = config.submitText
+            , iconName = Nothing
+            , iconPosition = Nothing
+            , onClick = SubmitEmail
+            , classes = [ "submit-button" ]
+            }
+        ]
+
+
+maybePrivacyText : Maybe (List (Html Msg)) -> Html Msg
+maybePrivacyText maybePrivacy =
+    case maybePrivacy of
+        Just content ->
+            div [ class "privacy-text" ] content
+
+        Nothing ->
+            Html.text ""
