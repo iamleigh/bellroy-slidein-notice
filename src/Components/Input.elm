@@ -1,13 +1,11 @@
 module Components.Input exposing (InputConfig, input)
 
 import Html exposing (Html, input)
-import Html.Attributes exposing (class, placeholder, type_, value)
+import Html.Attributes exposing (class, disabled, placeholder, type_, value)
 import Html.Events exposing (onInput)
 
 
-
 -- TYPES
-
 
 type alias InputConfig msg =
     { inputType : String
@@ -15,12 +13,11 @@ type alias InputConfig msg =
     , value : String
     , onInput : String -> msg
     , classes : List String
+    , disabled : Bool
     }
 
 
-
 -- VIEW
-
 
 input : InputConfig msg -> Html msg
 input config =
@@ -30,5 +27,6 @@ input config =
         , placeholder config.placeholderText
         , value config.value
         , onInput config.onInput
+        , disabled config.disabled
         ]
         []

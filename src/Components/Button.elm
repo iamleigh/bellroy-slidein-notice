@@ -87,7 +87,7 @@ uiButton config =
                 ++ config.classes
     in
     button
-        ([ class (String.join " " config.classes)
+        ([ class (String.join " " baseClasses)
          , onClick config.onClick
          ]
             ++ (if config.disabled then [ Html.Attributes.disabled True ] else [])

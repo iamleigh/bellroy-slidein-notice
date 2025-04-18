@@ -37,8 +37,9 @@ type alias SlideInNoticeModel =
     , email : String
     , animating : Bool
     , removed : Bool
+    , hasError : Bool
+    , loading : Bool
     , animationClass : String
-    , emailError : Maybe String
     }
 
 
@@ -47,9 +48,10 @@ slideInNoticeInit =
     { visible = False
     , email = ""
     , animating = False
-    , removed = True -- Start fully removed
+    , removed = True
+    , hasError = False
+    , loading = False
     , animationClass = ""
-    , emailError = Nothing
     }
 
 
@@ -101,18 +103,11 @@ slideInNoticeUpdate msg model =
 
         SubmitEmail ->
             if isValidEmail model.email then
-                ( { model
-                    | email = ""
-                    , emailError = Nothing
-                  }
-                , slideOutAndClose
+                ( { model | loading = True, hasError = False }
+                , Task.perform (\_ -> DismissNotice) (Process.sleep 1500)
                 )
             else
-                ( { model
-                    | emailError = Just "Please enter a valid email address."
-                  }
-                , Cmd.none
-                )
+                ( { model | hasError = True }, Cmd.none )
 
 
 delayFinishExit : Cmd Msg
@@ -193,35 +188,35 @@ noticeTitle titleText =
 noticeForm : Config -> SlideInNoticeModel -> Html Msg
 noticeForm config model =
     div [ class "bellroy-form" ]
-        [ Input.input
-            { inputType = "email"
-            , placeholderText = config.placeholder
-            , value = model.email
-            , onInput = UpdateEmail
-            , classes =
-                [ "bellroy-input"
-                ]
-                    ++ (case model.emailError of
-                            Just _ -> [ "error" ] -- 🔥 Add error class dynamically
-                            Nothing -> []
-                       )
-            }
-        , Button.uiButton
-            { label = config.submitText
-            , iconName = Nothing
-            , iconPosition = Nothing
-            , onClick = SubmitEmail
-            , classes = [ "bellroy-button" ]
-            , disabled = model.email == "" -- 🔥 Disable if empty
-            }
-        , case model.emailError of
-            Just err ->
-                div [ class "bellroy-error", attribute "role" "alert" ]
-                    [ text err ]
-
-            Nothing ->
-                Html.text ""
+        [ div [ class "bellroy-form__field" ]
+            [ Input.input
+                { inputType = "email"
+                , placeholderText = config.placeholder
+                , value = model.email
+                , onInput = UpdateEmail
+                , classes = [ if model.hasError then "error" else "" ]
+                , disabled = model.loading
+                }
+            , Button.uiButton
+                { label = if model.loading then "" else config.submitText
+                , iconName = if model.loading then Just "spinner" else Nothing
+                , iconPosition = Nothing
+                , onClick = SubmitEmail
+                , classes = [ "bellroy-button" ]
+                , disabled = model.loading || String.isEmpty model.email
+                }
+            ]
+        , maybeErrorMessage model
         ]
+
+
+maybeErrorMessage : SlideInNoticeModel -> Html Msg
+maybeErrorMessage model =
+    if model.hasError then
+        div [ class "bellroy-form__error", attribute "role" "alert" ]
+            [ text "The email entered is not valid. Please try again." ]
+    else
+        Html.text ""
 
 
 maybePrivacyText : Maybe (List (Html Msg)) -> Html Msg
