@@ -1,10 +1,9 @@
 /// -----------------------------------------------------------------------------
-/// 🟢 "Bellroy Slide-in Notice"
+/// 🟢 Layouts
 ///
-/// Import styles to use in the Bellroy challenge.
+/// Lists styles for all main layouts.
 ///
 /// @author Leighton Quito (iamleigh.com)
 /// -----------------------------------------------------------------------------
-@forward './_blocks/core';
-@forward './_blocks/components';
-@forward './_blocks/layouts';
+@forward '../_layouts/header';
+@forward '../_layouts/body';

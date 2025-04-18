@@ -1,0 +1,30 @@
+@use "../_utils/utils" as *;
+
+/// -----------------------------------------------------------------------------
+/// 🟢 Page
+/// Defines the main styles for the project page.
+///
+/// @author Leighton Quito (iamleigh.com)
+/// -----------------------------------------------------------------------------
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+
+	* {
+		box-sizing: border-box;
+	}
+}
+
+[hidden] {
+	display: none;
+}
+
+*:focus {
+	outline: none;
+}

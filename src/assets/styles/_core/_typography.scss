@@ -1,0 +1,113 @@
+@use "../_utils/utils" as *;
+
+// Import Lato and Arvo from Google Fonts
+@import url("https://fonts.googleapis.com/css2?family=Arvo&family=Lato:wght@400;700&display=swap");
+
+/// -----------------------------------------------------------------------------
+/// 🟢 Typography
+/// Defines the global typo styles for the project.
+///
+/// @author Leighton Quito (iamleigh.com)
+/// -----------------------------------------------------------------------------
+html {
+	font-size: $font-size-base;
+}
+
+body {
+	color: $color-neutral-30;
+	font-family: $font-family-primary;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	letter-spacing: 0;
+	font-weight: $font-weight-md;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	letter-spacing: 0;
+}
+
+::selection {
+	background: $color-primary;
+	color: $color-neutral-100;
+}
+
+a {
+	color: $color-secondary;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+p {
+	margin: 0 0 28px;
+	padding: 0;
+	border: 0;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+strong {
+	font-weight: $font-weight-lg;
+}
+
+// Heading
+@include block(heading) {
+	margin: 0;
+	letter-spacing: 0;
+
+	@include modifier(one) {
+		margin-bottom: 20px;
+		color: $color-neutral-10;
+		font-weight: $font-weight-md;
+		font-size: toRem($font-size-heading-one);
+		line-height: toRem($font-height-heading-one);
+		font-family: $font-family-secondary;
+		letter-spacing: -0.1px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		@include bp(min-width, sm) {
+			margin-bottom: 40px;
+			font-size: #{$font-size-heading-one + 16px};
+			line-height: #{$font-height-heading-one + 19px};
+		}
+	}
+
+	@include modifier(two) {
+		font-size: $font-size-heading-two;
+		line-height: $font-height-heading-two;
+	}
+
+	@include modifier(three) {
+		font-size: toRem($font-size-heading-three);
+		line-height: toRem($font-height-heading-three);
+		letter-spacing: 0.1px;
+
+		@include bp(min-width, sm) {
+			font-size: #{$font-size-heading-three + 2px};
+			line-height: #{$font-height-heading-three + 2px};
+		}
+	}
+}
+
+// Text Modifiers
+@include block(text) {
+	@include modifier(left) {
+		text-align: left;
+	}
+
+	@include modifier(center) {
+		text-align: center;
+	}
+
+	@include modifier(right) {
+		text-align: right;
+	}
+}

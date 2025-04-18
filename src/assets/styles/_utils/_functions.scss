@@ -1,10 +1,10 @@
 /// -----------------------------------------------------------------------------
-/// 🟢 "Bellroy Slide-in Notice"
+/// 🟢 Functions
 ///
-/// Import styles to use in the Bellroy challenge.
+/// List helper functions such as function to replace string, lighten color,
+/// darken color, etc.
 ///
 /// @author Leighton Quito (iamleigh.com)
 /// -----------------------------------------------------------------------------
-@forward './_blocks/core';
-@forward './_blocks/components';
-@forward './_blocks/layouts';
+@forward "./_functions/adjust-tint";
+@forward "./_functions/adjust-shade";

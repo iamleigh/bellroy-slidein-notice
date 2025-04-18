@@ -1,0 +1,48 @@
+@use "sass:map";
+@use "../tokens" as *;
+
+$breakpoints: (
+	sm: $bp-sm,
+	md: $bp-md,
+	lg: $bp-lg,
+);
+
+/// -----------------------------------------------------------------------------
+/// 🟢 Breakpoints
+///
+/// @author Leighton Quito (iamleigh.com)
+/// -----------------------------------------------------------------------------
+@mixin bp($range, $size-1, $size-2: null) {
+	// Validate `$size-1` existance in `$breakpoints`
+	@if map.has-key($breakpoints, $size-1) {
+		@if ($range) ==min-width {
+			$width: map.get($breakpoints, $size-1);
+
+			@media (min-width: $width) {
+				@content;
+			}
+		} @else if ($range) ==max-width {
+			$width: #{map.get($breakpoints, $size-1)};
+
+			@media (max-width: $width) {
+				@content;
+			}
+		} @else if ($range) ==between {
+			// Validate `$size-2` existance in `$breakpoints`
+			@if map.has-key($breakpoints, $size-2) {
+				$width-1: map.get($breakpoints, $size-1);
+				$width-2: #{map.get($breakpoints, $size-2) - 1px};
+
+				@media (min-width: $width-1) and (max-width: $width-2) {
+					@content;
+				}
+			} @else {
+				@error "Breakpoint size `#{$size-2}` does not exists.";
+			}
+		} @else {
+			@error "Device range `#{$range}` does not exists. Available options are `min-width`, `max-width`, or `between`.";
+		}
+	} @else {
+		@error "Breakpoint size `#{$size-1}` does not exists.";
+	}
+}

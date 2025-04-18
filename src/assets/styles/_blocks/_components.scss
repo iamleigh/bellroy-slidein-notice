@@ -1,10 +1,11 @@
 /// -----------------------------------------------------------------------------
-/// 🟢 "Bellroy Slide-in Notice"
+/// 🟢 Components
 ///
-/// Import styles to use in the Bellroy challenge.
+/// Lists styles for all main components.
 ///
 /// @author Leighton Quito (iamleigh.com)
 /// -----------------------------------------------------------------------------
-@forward './_blocks/core';
-@forward './_blocks/components';
-@forward './_blocks/layouts';
+@forward '../_components/button';
+@forward "../_components/input";
+@forward "../_components/form";
+@forward '../_components/notice';

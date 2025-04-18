@@ -1,10 +1,11 @@
 /// -----------------------------------------------------------------------------
-/// 🟢 "Bellroy Slide-in Notice"
+/// 🟢 Core
 ///
-/// Import styles to use in the Bellroy challenge.
+/// Lists all core styles of the project.
 ///
 /// @author Leighton Quito (iamleigh.com)
 /// -----------------------------------------------------------------------------
-@forward './_blocks/core';
-@forward './_blocks/components';
-@forward './_blocks/layouts';
+@forward "../_core/page";
+@forward "../_core/clearfix";
+@forward "../_core/typography";
+@forward "../_core/accessibility";

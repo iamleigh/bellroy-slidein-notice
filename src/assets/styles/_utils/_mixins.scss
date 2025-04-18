@@ -1,10 +1,7 @@
 /// -----------------------------------------------------------------------------
-/// 🟢 "Bellroy Slide-in Notice"
-///
-/// Import styles to use in the Bellroy challenge.
+/// 🟢 Mixins
 ///
 /// @author Leighton Quito (iamleigh.com)
 /// -----------------------------------------------------------------------------
-@forward './_blocks/core';
-@forward './_blocks/components';
-@forward './_blocks/layouts';
+@forward "./_mixins/bem";
+@forward "./_mixins/breakpoints";

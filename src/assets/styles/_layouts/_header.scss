@@ -1,0 +1,22 @@
+@use '../_utils/utils' as *;
+
+/// -----------------------------------------------------------------------------
+/// 🟢 Header
+///
+/// Give styles to the `Header` component.
+///
+/// @author Leighton Quito (iamleigh.com)
+/// -----------------------------------------------------------------------------
+@include block(header) {
+	display: block;
+	padding: 20px;
+
+	@include element(logo) {
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		max-height: 150px;
+		display: block;
+		margin: 0 auto;
+	}
+}

@@ -1,0 +1,75 @@
+@use '../_utils/utils' as *;
+
+/// -----------------------------------------------------------------------------
+/// 🟢 Button
+///
+/// Give styles to the "Button" (`uiButton`) component.
+///
+/// @author Leighton Quito (iamleigh.com)
+/// -----------------------------------------------------------------------------
+@include block(button) {
+	cursor: pointer;
+	width: auto;
+	position: relative;
+	display: block;
+	margin: 0;
+	padding: 12px 20px;
+	border: 1px solid shade($color-primary, 20%);
+	border-radius: 3px;
+	outline: none;
+	background: $color-primary;
+	color: $color-neutral-100;
+	font-weight: $font-weight-lg;
+	font-size: $font-size-body-sm;
+	line-height: 22px;
+	letter-spacing: 0;
+	text-align: center;
+	transition: 0.2s ease;
+
+	* {
+		user-select: none;
+		pointer-events: none;
+	}
+
+	&:hover {
+		background: shade($color-primary, 20%);
+		text-decoration: none;
+	}
+
+	&:focus {
+		background: $color-primary;
+		box-shadow: 0 0 0 1px #FFF, 0 0 0 3px $color-primary;
+	}
+
+	&:disabled {
+		cursor: default;
+		pointer-events: none;
+		border-color: $color-neutral-60;
+		background: $color-neutral-85;
+		color: $color-neutral-40;
+	}
+
+	// Modifier: Icon Button
+	@include modifier(icon) {
+		padding: 10px 16px;
+		border: none;
+		background: transparent;
+		color: $color-neutral-40;
+
+		&:hover {
+			background: $color-neutral-70;
+		}
+
+		&:focus {
+			background: $color-neutral-100;
+			box-shadow: 0 0 0 2px #FFF, 0 0 0 4px $color-neutral-70;
+		}
+	}
+
+	// Modifier: Floating Button
+	@include modifier(float) {
+		position: absolute;
+		top: 12px;
+		right: 12px;
+	}
+}

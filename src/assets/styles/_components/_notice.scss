@@ -1,0 +1,50 @@
+@use '../_utils/utils' as *;
+
+/// -----------------------------------------------------------------------------
+/// 🟢 Notice
+///
+/// Give styles to the `SlideInNotice` component.
+///
+/// @author Leighton Quito (iamleigh.com)
+/// -----------------------------------------------------------------------------
+@include block(notice) {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 90%;
+	max-width: 600px;
+	background-color: $color-secondary;
+	border-radius: 6px;
+	padding: 24px;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	font-family: sans-serif;
+
+	@media (prefers-reduced-motion: reduce) {
+		animation: none !important;
+		transition: none !important;
+	}
+
+	@include element(title) {
+		padding: 0 24px;
+		color: $color-primary;
+		font-weight: $font-weight-lg;
+		font-size: $font-size-heading-two;
+		line-height: $font-height-heading-two;
+		text-align: center;
+	}
+
+	@include element(copy) {
+		color: $color-neutral-40;
+		font-size: 12px;
+		text-align: center;
+
+		a {
+			cursor: pointer;
+			color: $color-primary;
+			text-decoration: underline;
+		}
+	}
+}

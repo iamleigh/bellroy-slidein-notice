@@ -1,0 +1,25 @@
+@use '../_utils/utils' as *;
+
+/// -----------------------------------------------------------------------------
+/// 🟢 Input
+///
+/// Give styles to the `Input` component.
+///
+/// @author Leighton Quito (iamleigh.com)
+/// -----------------------------------------------------------------------------
+@include block('input') {
+	flex: 1;
+	padding: 12px;
+	border: 1px solid $color-neutral-70;
+	border-radius: 3px;
+	outline: none;
+	background: $color-neutral-100;
+	font-size: $font-size-body-sm;
+	line-height: 22px;
+	transition: 0.2s ease;
+
+	&:focus {
+		border-color: $color-neutral-100;
+		box-shadow: 0 0 0 1px #FFF, 0 0 0 3px $color-primary;
+	}
+}
