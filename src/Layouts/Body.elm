@@ -10,7 +10,7 @@ view showNoticeMsg noticeVisible =
     div [ class "bellroy-body" ]
         [ p [] [ text "Welcome to Bellroy! We craft slim wallets, stylish bags, and accessories to help you move smarter through the world." ]
         , button
-            [ class "show-notice-button"
+            [ class "bellroy-button"
             , onClick showNoticeMsg
             , Html.Attributes.disabled noticeVisible
             ]

@@ -30,6 +30,7 @@ type alias ButtonConfig msg =
 uiButton : ButtonConfig msg -> Html msg
 uiButton config =
     let
+        -- Build the icon view if exists
         iconView maybeIconName =
             case maybeIconName of
                 Just name ->
@@ -42,9 +43,11 @@ uiButton config =
                 Nothing ->
                     text ""
 
+        -- Label view
         labelView =
             span [ class "button-label" ] [ text config.label ]
 
+        -- Arrange icon + label according to position
         contents =
             case ( config.iconName, config.iconPosition ) of
                 ( Just _, Just IconLeft ) ->
@@ -59,6 +62,7 @@ uiButton config =
                 ( Nothing, _ ) ->
                     [ labelView ]
 
+        -- Extra attributes for accessibility
         extraAttributes =
             case ( config.iconName, config.iconPosition ) of
                 ( Just _, Nothing ) ->
@@ -68,9 +72,21 @@ uiButton config =
                 _ ->
                     -- Normal button → no extra aria attributes
                     []
+
+        -- Dynamically build the classes
+        baseClasses =
+            [ "bellroy-button" ]
+                ++ (case ( config.iconName, config.iconPosition ) of
+                        ( Just _, Nothing ) ->
+                            [ "bellroy-button--icon" ]
+
+                        _ ->
+                            []
+                   )
+                ++ config.classes
     in
     button
-        ([ class (String.join " " config.classes)
+        ([ class (String.join " " baseClasses)
          , onClick config.onClick
          ]
             ++ extraAttributes

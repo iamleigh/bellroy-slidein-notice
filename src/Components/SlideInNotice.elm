@@ -136,7 +136,7 @@ dismissButton =
         , iconName = Just "xmark"
         , iconPosition = Nothing
         , onClick = DismissNotice
-        , classes = [ "dismiss-button" ]
+        , classes = [ "bellroy-button--float" ]
         }
 
 
@@ -161,7 +161,7 @@ noticeForm config model =
             , iconName = Nothing
             , iconPosition = Nothing
             , onClick = SubmitEmail
-            , classes = [ "submit-button" ]
+            , classes = [ "" ]
             }
         ]
 
