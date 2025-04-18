@@ -20,6 +20,7 @@ type alias ButtonConfig msg =
     , iconPosition : Maybe IconPosition
     , onClick : msg
     , classes : List String
+    , disabled : Bool
     }
 
 
@@ -86,9 +87,9 @@ uiButton config =
                 ++ config.classes
     in
     button
-        ([ class (String.join " " baseClasses)
+        ([ class (String.join " " config.classes)
          , onClick config.onClick
          ]
-            ++ extraAttributes
+            ++ (if config.disabled then [ Html.Attributes.disabled True ] else [])
         )
         contents

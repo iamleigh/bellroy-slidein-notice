@@ -38,6 +38,7 @@ type alias SlideInNoticeModel =
     , animating : Bool
     , removed : Bool
     , animationClass : String
+    , emailError : Maybe String
     }
 
 
@@ -48,6 +49,7 @@ slideInNoticeInit =
     , animating = False
     , removed = True -- Start fully removed
     , animationClass = ""
+    , emailError = Nothing
     }
 
 
@@ -98,11 +100,34 @@ slideInNoticeUpdate msg model =
             ( { model | email = newEmail }, Cmd.none )
 
         SubmitEmail ->
-            ( { model | email = "" }, Cmd.none )
+            if isValidEmail model.email then
+                ( { model
+                    | email = ""
+                    , emailError = Nothing
+                  }
+                , slideOutAndClose
+                )
+            else
+                ( { model
+                    | emailError = Just "Please enter a valid email address."
+                  }
+                , Cmd.none
+                )
 
 
 delayFinishExit : Cmd Msg
 delayFinishExit =
+    Task.perform (\_ -> FinishExitAnimation) (Process.sleep 500)
+
+
+isValidEmail : String -> Bool
+isValidEmail email =
+    -- very basic validation for now
+    String.contains "@" email && String.contains "." email
+
+
+slideOutAndClose : Cmd Msg
+slideOutAndClose =
     Task.perform (\_ -> FinishExitAnimation) (Process.sleep 500)
 
 
@@ -155,6 +180,7 @@ dismissButton =
         , iconPosition = Nothing
         , onClick = DismissNotice
         , classes = [ "bellroy-button--float" ]
+        , disabled = False
         }
 
 
@@ -172,15 +198,29 @@ noticeForm config model =
             , placeholderText = config.placeholder
             , value = model.email
             , onInput = UpdateEmail
-            , classes = [ "" ]
+            , classes =
+                [ "bellroy-input"
+                ]
+                    ++ (case model.emailError of
+                            Just _ -> [ "error" ] -- 🔥 Add error class dynamically
+                            Nothing -> []
+                       )
             }
         , Button.uiButton
             { label = config.submitText
             , iconName = Nothing
             , iconPosition = Nothing
             , onClick = SubmitEmail
-            , classes = [ "" ]
+            , classes = [ "bellroy-button" ]
+            , disabled = model.email == "" -- 🔥 Disable if empty
             }
+        , case model.emailError of
+            Just err ->
+                div [ class "bellroy-error", attribute "role" "alert" ]
+                    [ text err ]
+
+            Nothing ->
+                Html.text ""
         ]
 
 
