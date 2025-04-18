@@ -109,7 +109,11 @@ delayFinishExit =
 slideInNoticeView : Config -> SlideInNoticeModel -> Html Msg
 slideInNoticeView config model =
     if model.visible then
-        div [ class ("slide-in-notice " ++ model.animationClass) ]
+        div [ class ("slide-in-notice " ++ model.animationClass)
+            , Html.Attributes.attribute "role" "alert"
+            , Html.Attributes.attribute "aria-live" "assertive"
+            , Html.Attributes.tabindex -1
+            ]
             [ dismissButton
             , noticeTitle config.title
             , noticeForm config model
@@ -122,7 +126,7 @@ slideInNoticeView config model =
 dismissButton : Html Msg
 dismissButton =
     Button.uiButton
-        { label = "Close Notice"
+        { label = "Dismiss Notification"
         , iconName = Just "xmark"
         , iconPosition = Nothing
         , onClick = DismissNotice
