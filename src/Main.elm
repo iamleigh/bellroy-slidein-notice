@@ -1,9 +1,11 @@
-module Main exposing (init, main, update)
+module Main exposing (main, init, update)
 
 import Browser
 import Components.SlideInNotice exposing (Config, Msg(..), SlideInNoticeModel, slideInNoticeInit, slideInNoticeUpdate, slideInNoticeView)
-import Html exposing (Html, div, span, text)
-import Html.Attributes exposing (class)
+import Html exposing (Html, div, img, p, text)
+import Html.Attributes exposing (class, id, src, alt)
+import Layouts.Header as Header
+import Layouts.Body as Body
 
 
 
@@ -40,7 +42,7 @@ slideInNoticeConfig =
     , privacyText =
         Just
             [ text "You're consenting to our "
-            , span [ class "privacy-link" ] [ text "privacy policy" ]
+            , Html.span [ class "privacy-link" ] [ text "privacy policy" ]
             , text " and signing up to receive emails which you can opt out of at any time."
             ]
     }
@@ -48,8 +50,11 @@ slideInNoticeConfig =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ slideInNoticeView slideInNoticeConfig model
+    div [ id "bellroy-page" ]
+        [ Header.view
+        , Body.view
+        , div [ class "bellroy-notice" ]
+            [ slideInNoticeView slideInNoticeConfig model ]
         ]
 
 
