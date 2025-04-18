@@ -8,16 +8,13 @@
 /// @author Leighton Quito (iamleigh.com)
 /// -----------------------------------------------------------------------------
 @include block(notice) {
+	width: 100%;
 	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	width: 90%;
-	max-width: 600px;
+	left: 0;
+	bottom: 0;
 	background-color: $color-secondary;
-	border-radius: 6px;
-	padding: 24px;
-	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-	display: flex;
+	box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px 4px;
+	padding: 0 30px;
 	flex-direction: column;
 	gap: 16px;
 	font-family: sans-serif;
@@ -27,19 +24,57 @@
 		transition: none !important;
 	}
 
-	@include element(title) {
-		padding: 0 24px;
-		color: $color-primary;
-		font-weight: $font-weight-lg;
-		font-size: $font-size-heading-two;
-		line-height: $font-height-heading-two;
-		text-align: center;
+	// Element: Container
+	@include element(container) {
+		max-width: 1200px;
+		display: flex;
+		align-items: center;
+		margin: 0 auto;
 	}
 
+	// Element: Content
+	@include element(content) {
+		padding: 30px 0;
+	}
+
+	// Element: Image
+	@include element(img) {
+		max-width: 280px;
+		height: auto;
+		flex: 0 0 auto;
+
+		@include modifier(top) {
+			align-self: flex-start;
+			margin-top: -30px;
+		}
+
+		@include modifier(bottom) {
+			align-self: flex-end;
+		}
+	}
+
+	// Element: Title
+	@include element(title) {
+		color: $color-primary;
+		font-weight: $font-weight-lg;
+		font-size: $font-size-heading-three;
+		line-height: $font-height-heading-three;
+		text-align: center;
+
+		&:not(:last-child) {
+			margin-bottom: 16px;
+		}
+	}
+
+	// Element: Copy Text
 	@include element(copy) {
 		color: $color-neutral-40;
 		font-size: 12px;
 		text-align: center;
+
+		&:not(:first-child) {
+			margin-top: 8px;
+		}
 
 		a {
 			cursor: pointer;
