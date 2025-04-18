@@ -7,13 +7,17 @@ import Models.Product exposing (Product)
 
 view : Product -> Html msg
 view product =
-    li [ class "bellroy-product" ]
-        [ div [ class "bellroy-product__image" ]
-            (imageSection product)
-        , p [ class "bellroy-product__name" ]
-            [ text product.name ]
-        , p [ class "bellroy-product__price" ]
-            [ text ("$" ++ product.price) ]
+    li [ class "bellroy-products__item" ]
+        [ div [ class "bellroy-product" ]
+            [ div [ class "bellroy-product__image" ]
+                (imageSection product)
+            , div [ class "bellroy-product__details" ]
+                [ p [ class "bellroy-product__name" ]
+                    [ text product.name ]
+                , p [ class "bellroy-product__price" ]
+                    [ text (product.price) ]
+                ]
+            ]
         ]
 
 

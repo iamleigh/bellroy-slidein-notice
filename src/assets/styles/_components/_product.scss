@@ -1,0 +1,72 @@
+@use '../_utils/utils' as *;
+
+/// -----------------------------------------------------------------------------
+/// 🟢 Product
+///
+/// Give styles to the `Product` component.
+///
+/// @author Leighton Quito (iamleigh.com)
+/// -----------------------------------------------------------------------------
+@include block('product') {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+
+	@include bp(min-width, md) {
+		margin-bottom: 0;
+	}
+
+	@include element('image') {
+		width: 100%;
+		position: relative;
+		overflow: hidden;
+		display: block;
+		flex: 1;
+		padding-top: 100%;
+		background: #f7f7f7;
+
+		img {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			object-fit: cover;
+		}
+	}
+
+	@include element('tag') {
+		position: absolute;
+		z-index: 1;
+		bottom: 10px;
+		left: 10px;
+		padding: 4px 8px;
+		border-radius: 4px;
+		background: $color-primary;
+		color: $color-neutral-100;
+		font-size: $font-size-body-sm;
+		font-weight: $font-weight-lg;
+		line-height: $font-size-body-sm + 2px;
+	}
+
+	@include element('name') {
+		margin: 0;
+		color: $color-neutral-10;
+		font-weight: $font-weight-lg;
+		font-size: $font-size-body-md;
+		line-height: $font-height-heading-three;
+	}
+
+	@include element('price') {
+		margin: 0;
+		color: $color-primary;
+		font-weight: $font-weight-lg;
+		font-size: $font-size-body-sm;
+		line-height: 1;
+	}
+
+	@include element('details') {
+		flex: 0 0 auto;
+		margin: 8px 0 0;
+	}
+}

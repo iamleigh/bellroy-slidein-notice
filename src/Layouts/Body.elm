@@ -10,15 +10,17 @@ import Models.Product exposing (Product)
 view : List Product -> msg -> Bool -> Html msg
 view products showNoticeMsg noticeVisible =
     div [ class "bellroy-body" ]
-        [ p []
-            [ text "Welcome to Bellroy! We craft slim wallets, stylish bags, and accessories to help you move smarter through the world." ]
+        [ div [ class "bellroy-body__inner" ]
+            [ p []
+                [ text "Welcome to Bellroy! We craft slim wallets, stylish bags, and accessories to help you move smarter through the world." ]
 
-        , viewList products
+            , viewList products
 
-        , button
-            [ class "bellroy-button"
-            , onClick showNoticeMsg
-            , disabled noticeVisible
+            , button
+                [ class "bellroy-button"
+                , onClick showNoticeMsg
+                , disabled noticeVisible
+                ]
+                [ text "Show Notice Again" ]
             ]
-            [ text "Show Notice Again" ]
         ]

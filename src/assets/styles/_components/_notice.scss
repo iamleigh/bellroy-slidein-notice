@@ -10,6 +10,7 @@
 @include block(notice) {
 	width: 100%;
 	position: fixed;
+	z-index: 100;
 	left: 0;
 	bottom: 0;
 	padding: 0 20px;
