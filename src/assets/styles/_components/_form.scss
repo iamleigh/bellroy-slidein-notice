@@ -8,6 +8,21 @@
 /// @author Leighton Quito (iamleigh.com)
 /// -----------------------------------------------------------------------------
 @include block('form') {
-	display: flex;
-	gap: 8px;
+	display: block;
+
+	@include element('field') {
+		display: flex;
+		gap: 4px;
+	}
+
+	@include element('error') {
+		display: block;
+		margin-top: 8px;
+		padding: 4px;
+		border-radius: 3px;
+		background: tint($color-primary, 30%);
+		color: $color-secondary;
+		font-size: $font-size-body-sm;
+		line-height: 18px;
+	}
 }

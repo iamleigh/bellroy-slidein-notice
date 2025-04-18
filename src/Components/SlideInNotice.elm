@@ -188,7 +188,7 @@ dismissButton =
         , iconName = Just "xmark"
         , iconPosition = Nothing
         , onClick = DismissNotice
-        , classes = [ "bellroy-button--float" ]
+        , classes = [ "bellroy-notice__dismiss" ]
         , disabled = False
         }
 
@@ -201,7 +201,7 @@ noticeTitle titleText =
 
 noticeForm : Config -> SlideInNoticeModel -> Html Msg
 noticeForm config model =
-    div [ class "bellroy-form" ]
+    div [ class "bellroy-form bellroy-notice__form" ]
         [ div [ class "bellroy-form__field" ]
             [ Input.input
                 { inputType = "email"
