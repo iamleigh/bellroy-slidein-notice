@@ -1,0 +1,23 @@
+{
+  "name": "bellroy-slidein-notice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamleigh/bellroy-slidein-notice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iamleigh/bellroy-slidein-notice/issues"
+  },
+  "homepage": "https://github.com/iamleigh/bellroy-slidein-notice#readme",
+  "devDependencies": {
+    "elm": "^0.19.1-6"
+  }
+}
