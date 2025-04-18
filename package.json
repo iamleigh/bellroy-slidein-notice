@@ -9,10 +9,12 @@
     "dev:css": "NODE_NO_WARNINGS=1 gulp watch",
     "build": "NODE_NO_WARNINGS=1 gulp build",
     "prod": "npm run build -- --production && npx elm make src/Main.elm --output=public/main.js",
-    "format": "npm run format:elm && npm run format:css",
+    "format": "npm run format:elm && npm run format:tests && npm run format:css",
     "format:elm": "npx elm-format src/ --yes",
+    "format:tests": "npx elm-format tests/ --yes",
     "format:css": "prettier --write \"src/assets/styles/**/*.scss\"",
-    "lint": "npx elm-review"
+    "lint": "npx elm-review",
+    "test": "npx elm-test"
   },
   "repository": {
     "type": "git",
