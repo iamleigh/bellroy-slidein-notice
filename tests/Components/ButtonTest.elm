@@ -1,6 +1,6 @@
 module Components.ButtonTest exposing (all)
 
-import Components.Button exposing (uiButton, IconPosition(..))
+import Components.Button exposing (IconPosition(..), uiButton)
 import Expect
 import Html.Attributes
 import Html.Events
@@ -30,7 +30,6 @@ all =
                         , class "my-button"
                         , text "Click Me"
                         ]
-
         , test "renders a button with an icon on the left" <|
             \_ ->
                 let
@@ -52,7 +51,6 @@ all =
                         , class "fa-xs"
                         , class "fa-download"
                         ]
-
         , test "renders a button with an icon on the right" <|
             \_ ->
                 let
@@ -74,7 +72,6 @@ all =
                         , class "fa-xs"
                         , class "fa-arrow-right"
                         ]
-
         , test "renders a button with only an icon and no label" <|
             \_ ->
                 let
@@ -99,6 +96,9 @@ all =
         ]
 
 
+
 -- Dummy message for simulating button clicks
+
+
 type DummyMsg
     = DummyClick

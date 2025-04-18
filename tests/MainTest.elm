@@ -1,9 +1,9 @@
 module MainTest exposing (all)
 
-import Expect
-import Test exposing (..)
-import Main exposing (init, update)
 import Components.SlideInNotice exposing (Msg(..))
+import Expect
+import Main exposing (init, update)
+import Test exposing (..)
 
 
 all : Test
