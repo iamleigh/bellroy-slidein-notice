@@ -76,7 +76,7 @@ slideInNoticeConfig =
     , privacyText =
         Just
             [ text "You're consenting to our "
-            , Html.span [ class "privacy-link" ] [ text "privacy policy" ]
+            , Html.a [ class "privacy-link" ] [ text "privacy policy" ]
             , text " and signing up to receive emails which you can opt out of at any time."
             ]
     }
