@@ -31,6 +31,7 @@
     "elm": "^0.19.1-6",
     "elm-format": "^0.8.7",
     "elm-review": "^2.13.2",
+    "elm-test": "^0.19.1-revision15",
     "gulp": "^5.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-header": "^2.0.9",
