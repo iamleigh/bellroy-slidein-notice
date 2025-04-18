@@ -63,8 +63,7 @@ view model =
             [ Header.view
             , Body.view ShowNotice model.visible
             ]
-        , div [ class "bellroy-notice" ]
-            [ slideInNoticeView slideInNoticeConfig model ]
+        , slideInNoticeView slideInNoticeConfig model
         ]
 
 
