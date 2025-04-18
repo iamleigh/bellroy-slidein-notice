@@ -7,3 +7,6 @@
 
 # Ignore built distribution files
 /public
+
+# Ignore system files
+.DS_Store
