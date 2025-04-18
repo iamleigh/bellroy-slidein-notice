@@ -18,6 +18,10 @@
 	line-height: 22px;
 	transition: 0.2s ease;
 
+	&:hover {
+		border-color: $color-primary;
+	}
+
 	&:focus {
 		border-color: $color-neutral-100;
 		box-shadow: 0 0 0 1px #FFF, 0 0 0 3px $color-primary;
