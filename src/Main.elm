@@ -1,11 +1,11 @@
-module Main exposing (main, init, update)
+module Main exposing (init, main, update)
 
 import Browser
 import Components.SlideInNotice exposing (Config, Msg(..), SlideInNoticeModel, slideInNoticeInit, slideInNoticeUpdate, slideInNoticeView)
 import Html exposing (Html, div, img, p, text)
-import Html.Attributes exposing (class, id, src, alt)
-import Layouts.Header as Header
+import Html.Attributes exposing (alt, class, id, src)
 import Layouts.Body as Body
+import Layouts.Header as Header
 
 
 
@@ -50,9 +50,11 @@ slideInNoticeConfig =
 
 view : Model -> Html Msg
 view model =
-    div [ id "bellroy-page" ]
-        [ Header.view
-        , Body.view
+    div [ id "app", class "bellroy-ui" ]
+        [ div [ class "bellroy-page" ]
+            [ Header.view
+            , Body.view
+            ]
         , div [ class "bellroy-notice" ]
             [ slideInNoticeView slideInNoticeConfig model ]
         ]
