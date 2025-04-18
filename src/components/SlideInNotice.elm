@@ -7,9 +7,10 @@ module Components.SlideInNotice exposing
     , slideInNoticeView
     )
 
-import Html exposing (Html, button, div, input, span, text)
-import Html.Attributes exposing (class, placeholder, type_, value)
-import Html.Events exposing (onClick, onInput)
+import Components.Button as Button
+import Components.Input as Input
+import Html exposing (Html, div, span, text)
+import Html.Attributes exposing (class)
 
 
 
@@ -74,22 +75,33 @@ slideInNoticeView config model =
     if model.visible then
         div [ class "slide-in-notice" ]
             [ -- Dismiss button
-              button [ class "dismiss-button", onClick DismissNotice ] [ text "×" ]
+              Button.uiButton
+                { label = "Close Notice"
+                , iconName = Just "xmark"
+                , iconPosition = Nothing
+                , onClick = DismissNotice
+                , classes = [ "dismiss-button" ]
+                }
 
             -- Title
             , div [ class "notice-title" ] [ text config.title ]
 
             -- Input and submit
             , div [ class "notice-form" ]
-                [ input
-                    [ class "email-input"
-                    , type_ "email"
-                    , placeholder config.placeholder
-                    , value model.email
-                    , onInput UpdateEmail
-                    ]
-                    []
-                , button [ class "submit-button", onClick SubmitEmail ] [ text config.submitText ]
+                [ Input.input
+                    { inputType = "email"
+                    , placeholderText = config.placeholder
+                    , value = model.email
+                    , onInput = UpdateEmail
+                    , classes = [ "email-input" ]
+                    }
+                , Button.uiButton
+                    { label = config.submitText
+                    , iconName = Nothing
+                    , iconPosition = Nothing
+                    , onClick = SubmitEmail
+                    , classes = [ "submit-button" ]
+                    }
                 ]
 
             -- Privacy note
