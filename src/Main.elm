@@ -1,4 +1,4 @@
-module Main exposing (main)
+module Main exposing (main, init, update)
 
 import Browser
 import Components.SlideInNotice exposing (Config, Msg(..), SlideInNoticeModel, slideInNoticeInit, slideInNoticeUpdate, slideInNoticeView)
