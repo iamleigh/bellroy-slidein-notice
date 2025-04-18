@@ -10,7 +10,7 @@ view =
         [ img
             [ src "/images/bellroy-logo.svg"
             , alt "Bellroy Logo"
-            , class "bellroy-logo"
+            , class "bellroy-header__logo"
             ]
             []
         ]
