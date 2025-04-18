@@ -32,13 +32,17 @@ type alias Config =
 type alias SlideInNoticeModel =
     { visible : Bool
     , email : String
+    , animating : Bool
+    , animationClass : String
     }
 
 
 slideInNoticeInit : SlideInNoticeModel
 slideInNoticeInit =
-    { visible = True
+    { visible = False
     , email = ""
+    , animating = False
+    , animationClass = ""
     }
 
 
@@ -50,13 +54,36 @@ type Msg
     = DismissNotice
     | UpdateEmail String
     | SubmitEmail
+    | ShowNotice
+    | StartExitAnimation
+    | FinishExitAnimation
 
 
 slideInNoticeUpdate : Msg -> SlideInNoticeModel -> SlideInNoticeModel
 slideInNoticeUpdate msg model =
     case msg of
+        ShowNotice ->
+            { model
+                | visible = True
+                , animating = True
+                , animationClass = "animate__animated animate__slideInUp"
+            }
+
         DismissNotice ->
-            { model | visible = False }
+            { model
+                | animating = True
+                , animationClass = "animate__animated animate__slideOutDown"
+            }
+
+        StartExitAnimation ->
+            model
+
+        FinishExitAnimation ->
+            { model
+                | visible = False
+                , animating = False
+                , animationClass = ""
+            }
 
         UpdateEmail newEmail ->
             { model | email = newEmail }
@@ -73,7 +100,7 @@ slideInNoticeUpdate msg model =
 slideInNoticeView : Config -> SlideInNoticeModel -> Html Msg
 slideInNoticeView config model =
     if model.visible then
-        div [ class "slide-in-notice" ]
+        div [ class ("slide-in-notice " ++ model.animationClass) ]
             [ -- Dismiss button
               Button.uiButton
                 { label = "Close Notice"

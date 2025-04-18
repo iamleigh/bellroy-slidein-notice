@@ -6,6 +6,9 @@ import Html exposing (Html, div, img, p, text)
 import Html.Attributes exposing (alt, class, id, src)
 import Layouts.Body as Body
 import Layouts.Header as Header
+import Process
+import Task
+import Time exposing (Posix)
 
 
 
@@ -21,13 +24,18 @@ init =
     slideInNoticeInit
 
 
+showAfterDelay : Cmd Msg
+showAfterDelay =
+    Task.perform (\_ -> ShowNotice) (Process.sleep 1500)
+
+
 
 -- UPDATE
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    slideInNoticeUpdate msg model
+    ( slideInNoticeUpdate msg model, Cmd.none )
 
 
 
@@ -64,10 +72,15 @@ view model =
 -- MAIN
 
 
-main : Program () Model Msg
+type alias Flags =
+    ()
+
+
+main : Program Flags Model Msg
 main =
-    Browser.sandbox
-        { init = init
+    Browser.element
+        { init = \_ -> ( init, showAfterDelay )
         , update = update
         , view = view
+        , subscriptions = \_ -> Sub.none
         }
