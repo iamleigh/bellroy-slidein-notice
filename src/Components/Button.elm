@@ -35,7 +35,7 @@ uiButton config =
             case maybeIconName of
                 Just name ->
                     span
-                        [ class ("fa-solid fa-xs fa-" ++ name)
+                        [ class ("fa-solid fa-" ++ name)
                         , attribute "aria-hidden" "true"
                         ]
                         []
