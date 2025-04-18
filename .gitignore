@@ -5,4 +5,4 @@
 /elm-stuff
 
 # Ignore built distribution files
-/public/main.js
+/public
