@@ -14,6 +14,9 @@ import Html.Attributes exposing (attribute, class, tabindex, alt, src)
 import Html.Events exposing (onClick)
 import Process
 import Task
+import Utils.Animations exposing (slideIn, slideOut)
+import Utils.Email exposing (isValid)
+import Utils.Strings exposing (trim)
 
 
 
@@ -76,7 +79,7 @@ slideInNoticeUpdate msg model =
                 | visible = True
                 , animating = True
                 , removed = False
-                , animationClass = "animate__animated animate__slideInUp"
+                , animationClass = Utils.Animations.slideIn
               }
             , Cmd.none
             )
@@ -87,7 +90,7 @@ slideInNoticeUpdate msg model =
                 , hasError = False
                 , loading = False
                 , animating = True
-                , animationClass = "animate__animated animate__slideOutDown"
+                , animationClass = Utils.Animations.slideOut
               }
             , delayFinishExit
             )
@@ -106,8 +109,11 @@ slideInNoticeUpdate msg model =
             ( { model | email = newEmail }, Cmd.none )
 
         SubmitEmail ->
-            if isValidEmail model.email then
-                ( { model | loading = True, hasError = False }
+            let
+                cleanedEmail = trim model.email
+            in
+            if isValid cleanedEmail then
+                ( { model | loading = True, hasError = False, email = cleanedEmail }
                 , Task.perform (\_ -> FinishSuccessfulSubmit) (Process.sleep 1500)
                 )
             else
@@ -118,7 +124,7 @@ slideInNoticeUpdate msg model =
                 | email = ""
                 , animating = True
                 , loading = False
-                , animationClass = "animate__animated animate__slideOutDown"
+                , animationClass = Utils.Animations.slideOut
             }
             , delayFinishExit
             )
@@ -127,12 +133,6 @@ slideInNoticeUpdate msg model =
 delayFinishExit : Cmd Msg
 delayFinishExit =
     Task.perform (\_ -> FinishExitAnimation) (Process.sleep 500)
-
-
-isValidEmail : String -> Bool
-isValidEmail email =
-    -- very basic validation for now
-    String.contains "@" email && String.contains "." email
 
 
 slideOutAndClose : Cmd Msg
