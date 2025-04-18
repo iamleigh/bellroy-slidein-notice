@@ -61,7 +61,7 @@ view model =
     div [ id "app", class "bellroy-ui" ]
         [ div [ class "bellroy-page" ]
             [ Header.view
-            , Body.view
+            , Body.view ShowNotice
             ]
         , div [ class "bellroy-notice" ]
             [ slideInNoticeView slideInNoticeConfig model ]
