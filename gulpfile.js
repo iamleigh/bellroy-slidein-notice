@@ -94,7 +94,7 @@ gulp.task("styles", function () {
  */
 gulp.task("images", function () {
 	return gulp
-		.src(srcInput.img + "**/*.{png,jpg,jpeg,svg,gif}", { buffer: true })
+		.src(srcInput.img + "**/*.{png,jpg,jpeg,svg,gif}", { buffer: true, encoding: false })
 		.pipe(gulp.dest(srcOutput.img))
 		.on("finish", async function () {
             console.log("🖼 Finished copying images.");
