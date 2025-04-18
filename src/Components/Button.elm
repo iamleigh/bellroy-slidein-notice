@@ -35,8 +35,13 @@ uiButton config =
         iconView maybeIconName =
             case maybeIconName of
                 Just name ->
+                    let
+                        baseClass = "fa-solid fa-" ++ name
+                        spinClass = if name == "spinner" then "fa-spin" else ""
+
+                    in
                     span
-                        [ class ("fa-solid fa-" ++ name)
+                        [ class (String.join " " [ baseClass, spinClass ])
                         , attribute "aria-hidden" "true"
                         ]
                         []

@@ -212,7 +212,7 @@ noticeForm config model =
                 , disabled = model.loading
                 }
             , Button.uiButton
-                { label = if model.loading then "" else config.submitText
+                { label = if model.loading then "Subscribing" else config.submitText
                 , iconName = if model.loading then Just "spinner" else Nothing
                 , iconPosition = Nothing
                 , onClick = SubmitEmail
