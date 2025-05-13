@@ -24,6 +24,7 @@ view product =
 imageSection : Product -> List (Html msg)
 imageSection product =
     let
+        baseImage : Html msg
         baseImage =
             img
                 [ src product.image

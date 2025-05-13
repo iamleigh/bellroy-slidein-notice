@@ -2,7 +2,7 @@ module Components.SlideInNoticeTest exposing (all)
 
 import Components.SlideInNotice exposing (Msg(..), SlideInNoticeModel, slideInNoticeInit, slideInNoticeUpdate)
 import Expect
-import Test exposing (..)
+import Test exposing (Test, describe, test)
 
 
 all : Test

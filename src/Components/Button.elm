@@ -32,13 +32,16 @@ uiButton : ButtonConfig msg -> Html msg
 uiButton config =
     let
         -- Build the icon view if exists
+        iconView : Maybe String -> Html string
         iconView maybeIconName =
             case maybeIconName of
                 Just name ->
                     let
+                        baseClass : String
                         baseClass =
                             "fa-solid fa-" ++ name
 
+                        spinClass : String
                         spinClass =
                             if name == "spinner" then
                                 "fa-spin"
@@ -56,10 +59,12 @@ uiButton config =
                     text ""
 
         -- Label view
+        labelView : Html msg
         labelView =
             span [ class "button-label" ] [ text config.label ]
 
         -- Arrange icon + label according to position
+        contents : List (Html msg)
         contents =
             case ( config.iconName, config.iconPosition ) of
                 ( Just _, Just IconLeft ) ->
@@ -75,6 +80,7 @@ uiButton config =
                     [ labelView ]
 
         -- Extra attributes for accessibility
+        extraAttributes : List (Html.Attribute msg)
         extraAttributes =
             case ( config.iconName, config.iconPosition ) of
                 ( Just _, Nothing ) ->
@@ -86,6 +92,7 @@ uiButton config =
                     []
 
         -- Dynamically build the classes
+        baseClasses : List String
         baseClasses =
             [ "bellroy-button" ]
                 ++ (case ( config.iconName, config.iconPosition ) of

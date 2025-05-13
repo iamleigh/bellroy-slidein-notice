@@ -1,4 +1,4 @@
-module Main exposing (Msg(..), init, main, update)
+module Main exposing (Msg(..), Flags, Model, init, main, update)
 
 import Browser
 import Browser.Events

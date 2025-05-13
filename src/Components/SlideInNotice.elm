@@ -110,6 +110,7 @@ slideInNoticeUpdate msg model =
 
         SubmitEmail ->
             let
+                cleanedEmail : String
                 cleanedEmail =
                     trim model.email
             in

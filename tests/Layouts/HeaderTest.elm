@@ -3,7 +3,7 @@ module Layouts.HeaderTest exposing (all)
 import Expect
 import Html.Attributes
 import Layouts.Header exposing (view)
-import Test exposing (..)
+import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
 import Test.Html.Selector as Selector exposing (tag, attribute)
 

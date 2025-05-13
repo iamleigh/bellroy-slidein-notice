@@ -5,7 +5,7 @@ import Html exposing (text)
 import Html.Attributes
 import Layouts.Body exposing (view)
 import Models.Product exposing (Product)
-import Test exposing (..)
+import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
 import Test.Html.Selector as Selector exposing (tag, text)
 
@@ -20,6 +20,7 @@ all =
         [ test "renders welcome text and show notice button" <|
             \_ ->
                 let
+                    viewHtml : Html.Html DummyMsg
                     viewHtml =
                         view [] DummyClick False
                 in
@@ -31,11 +32,13 @@ all =
         , test "renders products list when provided" <|
             \_ ->
                 let
+                    products : List Product
                     products =
                         [ { name = "Slim Sleeve Wallet", price = "79.00", highlight = False, image = "/images/slim.png" }
                         , { name = "Note Sleeve Wallet", price = "89.00", highlight = True, image = "/images/note.png" }
                         ]
 
+                    viewHtml : Html.Html DummyMsg
                     viewHtml =
                         view products DummyClick False
                 in
@@ -47,6 +50,7 @@ all =
         , test "renders disabled button when noticeVisible is True" <|
             \_ ->
                 let
+                    viewHtml : Html.Html DummyMsg
                     viewHtml =
                         view [] DummyClick True
                 in

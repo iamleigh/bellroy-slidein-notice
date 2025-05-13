@@ -3,7 +3,8 @@ module Components.ButtonTest exposing (all)
 import Components.Button exposing (IconPosition(..), uiButton)
 import Expect
 import Html.Events exposing (onClick)
-import Test exposing (..)
+import Html
+import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
 import Test.Html.Selector exposing (class, tag, text)
 
@@ -18,6 +19,7 @@ all =
         [ test "renders a button with label only" <|
             \_ ->
                 let
+                    view : Html.Html DummyMsg
                     view =
                         uiButton
                             { label = "Click Me"
@@ -38,6 +40,7 @@ all =
         , test "renders a button with an icon on the left" <|
             \_ ->
                 let
+                    view : Html.Html DummyMsg
                     view =
                         uiButton
                             { label = "Download"
@@ -60,6 +63,7 @@ all =
         , test "renders a button with an icon on the right" <|
             \_ ->
                 let
+                    view : Html.Html DummyMsg
                     view =
                         uiButton
                             { label = "Next"
@@ -82,6 +86,7 @@ all =
         , test "renders a button with only an icon and no label" <|
             \_ ->
                 let
+                    view : Html.Html DummyMsg
                     view =
                         uiButton
                             { label = "Dismiss"

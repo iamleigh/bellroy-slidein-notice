@@ -6,13 +6,14 @@ import Html.Attributes as Attr
 import Http
 import Main exposing (Msg(..), update, init)
 import Models.Product exposing (Product)
-import Test exposing (..)
+import Test exposing (Test, describe, test)
 
 
 type alias DummyFlags =
     ()
 
 
+initialModel : Main.Model
 initialModel =
     { slideInNotice = slideInNoticeInit
     , products = []
@@ -34,6 +35,7 @@ all =
             , test "FetchProducts Ok updates products" <|
                 \_ ->
                     let
+                        products : List Product
                         products =
                             [ { name = "Slim Sleeve", price = "79.00", highlight = False, image = "/images/slim.jpg" } ]
 

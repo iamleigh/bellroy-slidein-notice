@@ -4,7 +4,7 @@ import Components.Product exposing (view)
 import Expect
 import Html exposing (Html)
 import Models.Product exposing (Product)
-import Test exposing (..)
+import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
 import Test.Html.Selector exposing (class, tag, text)
 
@@ -15,6 +15,7 @@ all =
         [ test "renders product without highlight" <|
             \_ ->
                 let
+                    product : Product
                     product =
                         { name = "Slim Sleeve Wallet"
                         , price = "$79.00"
@@ -22,6 +23,7 @@ all =
                         , highlight = False
                         }
 
+                    rendered : Html msg
                     rendered = view product
                 in
                 Query.fromHtml rendered
@@ -39,6 +41,7 @@ all =
         , test "renders product with highlight (Value Set tag)" <|
             \_ ->
                 let
+                    product : Product
                     product =
                         { name = "Note Sleeve Wallet"
                         , price = "$89.00"
@@ -46,6 +49,7 @@ all =
                         , highlight = True
                         }
 
+                    rendered : Html msg
                     rendered = view product
                 in
                 Query.fromHtml rendered
