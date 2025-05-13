@@ -4,6 +4,7 @@ import Components.Products exposing (viewList)
 import Models.Product exposing (Product)
 import Test exposing (Test, describe, test)
 import Expect
+import Html
 import Test.Html.Query as Query
 import Test.Html.Selector exposing (class, tag, text)
 

@@ -2,6 +2,7 @@ module Components.InputTest exposing (all)
 
 import Components.Input exposing (input)
 import Expect
+import Html
 import Test exposing (Test, describe, test)
 import Test.Html.Query as Query
 import Test.Html.Selector exposing (class, tag, disabled)
@@ -13,7 +14,7 @@ all =
         [ test "renders enabled input with correct classes" <|
             \_ ->
                 let
-                    view : Html.Html msg
+                    view : Html.Html String
                     view =
                         input
                             { inputType = "email"
@@ -35,7 +36,7 @@ all =
         , test "renders disabled input" <|
             \_ ->
                 let
-                    view : Html.Html msg
+                    view : Html.Html String
                     view =
                         input
                             { inputType = "email"
