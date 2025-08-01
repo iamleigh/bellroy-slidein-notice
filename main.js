@@ -6943,7 +6943,7 @@ var $author$project$Components$SlideInNotice$slideInNoticeView = F2(
 						[
 							A3(
 							$author$project$Components$SlideInNotice$imgElement,
-							'/images/bellroy-card.png',
+							'./images/bellroy-card.png',
 							'Gift card wrapped with ribbon',
 							_List_fromArray(
 								['bellroy-notice__img--bottom'])),
@@ -6961,7 +6961,7 @@ var $author$project$Components$SlideInNotice$slideInNoticeView = F2(
 								])),
 							A3(
 							$author$project$Components$SlideInNotice$imgElement,
-							'/images/bellroy-magnets.png',
+							'./images/bellroy-magnets.png',
 							'Box with magnets and pins',
 							_List_fromArray(
 								['bellroy-notice__img--top']))
