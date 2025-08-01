@@ -9,9 +9,8 @@ module Components.SlideInNotice exposing
 
 import Components.Button as Button
 import Components.Input as Input
-import Html exposing (Html, div, img, span, text)
-import Html.Attributes exposing (alt, attribute, class, src, tabindex)
-import Html.Events exposing (onClick)
+import Html exposing (Html, div, text)
+import Html.Attributes exposing (alt, attribute, class, src)
 import Process
 import Task
 import Utils.Animations exposing (slideIn, slideOut)
@@ -79,7 +78,7 @@ slideInNoticeUpdate msg model =
                 | visible = True
                 , animating = True
                 , removed = False
-                , animationClass = Utils.Animations.slideIn
+                , animationClass = slideIn
               }
             , Cmd.none
             )
@@ -90,7 +89,7 @@ slideInNoticeUpdate msg model =
                 , hasError = False
                 , loading = False
                 , animating = True
-                , animationClass = Utils.Animations.slideOut
+                , animationClass = slideOut
               }
             , delayFinishExit
             )
@@ -127,7 +126,7 @@ slideInNoticeUpdate msg model =
                 | email = ""
                 , animating = True
                 , loading = False
-                , animationClass = Utils.Animations.slideOut
+                , animationClass = slideOut
               }
             , delayFinishExit
             )
@@ -135,11 +134,6 @@ slideInNoticeUpdate msg model =
 
 delayFinishExit : Cmd Msg
 delayFinishExit =
-    Task.perform (\_ -> FinishExitAnimation) (Process.sleep 500)
-
-
-slideOutAndClose : Cmd Msg
-slideOutAndClose =
     Task.perform (\_ -> FinishExitAnimation) (Process.sleep 500)
 
 
