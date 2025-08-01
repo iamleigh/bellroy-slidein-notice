@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Venture Sling 6L",
+    "price": "$129",
+    "highlight": false,
+    "image": "/images/bellroy-product-sling.png"
+  },
+  {
+    "id": 2,
+    "name": "Tech Kit",
+    "price": "$59",
+    "highlight": false,
+    "image": "/images/bellroy-product-tech-kit.png"
+  },
+  {
+    "id": 3,
+    "name": "Pack Well Travel Set",
+    "price": "$79",
+    "highlight": true,
+    "image": "/images/bellroy-product-travel-set.png"
+  }
+]

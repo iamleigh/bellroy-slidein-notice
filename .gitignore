@@ -1,0 +1,12 @@
+# Ignore node modules
+/node_modules
+
+# Ignore Elm build stuff
+/elm-stuff
+/review/elm-stuff
+
+# Ignore built distribution files
+/public
+
+# Ignore system files
+.DS_Store
