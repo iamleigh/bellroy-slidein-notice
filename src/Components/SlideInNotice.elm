@@ -161,13 +161,13 @@ slideInNoticeView config model =
             ]
             [ dismissButton
             , div [ class "bellroy-notice__container" ]
-                [ imgElement "/images/bellroy-card.png" "Gift card wrapped with ribbon" [ "bellroy-notice__img--bottom" ]
+                [ imgElement "./images/bellroy-card.png" "Gift card wrapped with ribbon" [ "bellroy-notice__img--bottom" ]
                 , div [ class "bellroy-notice__content" ]
                     [ noticeTitle config.title
                     , noticeForm config model
                     , maybePrivacyText config.privacyText
                     ]
-                , imgElement "/images/bellroy-magnets.png" "Box with magnets and pins" [ "bellroy-notice__img--top" ]
+                , imgElement "./images/bellroy-magnets.png" "Box with magnets and pins" [ "bellroy-notice__img--top" ]
                 ]
             ]
 

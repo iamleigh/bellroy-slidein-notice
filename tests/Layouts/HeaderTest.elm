@@ -20,6 +20,6 @@ all =
                         , tag "img"
                         , Selector.class "bellroy-header__logo"
                         , attribute (Html.Attributes.alt "Bellroy Logo")
-                        , attribute (Html.Attributes.src "/images/bellroy-logo.svg")
+                        , attribute (Html.Attributes.src "./images/bellroy-logo.svg")
                         ]
         ]

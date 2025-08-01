@@ -37,7 +37,7 @@ all =
                     let
                         products : List Product
                         products =
-                            [ { name = "Slim Sleeve", price = "79.00", highlight = False, image = "/images/slim.jpg" } ]
+                            [ { name = "Slim Sleeve", price = "79.00", highlight = False, image = "./images/slim.jpg" } ]
 
                         ( updatedModel, _ ) =
                             update (FetchProducts (Ok products)) initialModel

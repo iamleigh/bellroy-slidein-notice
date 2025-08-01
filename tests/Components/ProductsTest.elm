@@ -30,8 +30,8 @@ all =
                     view : Html.Html msg
                     view =
                         viewList
-                            [ { name = "Wallet", price = "79.00", highlight = False, image = "/images/wallet.jpg" }
-                            , { name = "Backpack", price = "199.00", highlight = True, image = "/images/backpack.jpg" }
+                            [ { name = "Wallet", price = "79.00", highlight = False, image = "./images/wallet.jpg" }
+                            , { name = "Backpack", price = "199.00", highlight = True, image = "./images/backpack.jpg" }
                             ]
                 in
                 Query.fromHtml view

@@ -34,8 +34,8 @@ all =
                 let
                     products : List Product
                     products =
-                        [ { name = "Slim Sleeve Wallet", price = "79.00", highlight = False, image = "/images/slim.png" }
-                        , { name = "Note Sleeve Wallet", price = "89.00", highlight = True, image = "/images/note.png" }
+                        [ { name = "Slim Sleeve Wallet", price = "79.00", highlight = False, image = "./images/slim.png" }
+                        , { name = "Note Sleeve Wallet", price = "89.00", highlight = True, image = "./images/note.png" }
                         ]
 
                     viewHtml : Html.Html DummyMsg

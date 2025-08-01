@@ -19,7 +19,7 @@ all =
                     product =
                         { name = "Slim Sleeve Wallet"
                         , price = "$79.00"
-                        , image = "/images/slim-sleeve.png"
+                        , image = "./images/slim-sleeve.png"
                         , highlight = False
                         }
 
@@ -45,7 +45,7 @@ all =
                     product =
                         { name = "Note Sleeve Wallet"
                         , price = "$89.00"
-                        , image = "/images/note-sleeve.png"
+                        , image = "./images/note-sleeve.png"
                         , highlight = True
                         }
 

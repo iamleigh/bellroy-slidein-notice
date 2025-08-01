@@ -45,7 +45,7 @@ showAfterDelay =
 fetchProducts : Cmd Msg
 fetchProducts =
     Http.get
-        { url = "/data/products.json"
+        { url = "./data/products.json"
         , expect = Http.expectJson FetchProducts (Decode.list Models.Product.productDecoder)
         }
 
