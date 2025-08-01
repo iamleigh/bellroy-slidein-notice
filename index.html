@@ -15,7 +15,15 @@
 		<div id="app"></div>
 		<script src="main.js"></script>
 		<script>
-			Elm.Main.init({node: document.getElementById("app")});
+			const isGithubPages = window.location.hostname.includes("github.io");
+			const basePath = isGithubPages ? "bellroy-slidein-notice/" : "";
+
+			Elm.Main.init({
+				node: document.getElementById("app"),
+				flags: {
+					basePath: basePath
+				}
+			});
 		</script>
 	</body>
 </html>
