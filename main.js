@@ -6147,7 +6147,7 @@ var $author$project$Main$fetchProducts = $elm$http$Http$get(
 			$elm$http$Http$expectJson,
 			$author$project$Main$FetchProducts,
 			$elm$json$Json$Decode$list($author$project$Models$Product$productDecoder)),
-		url: '/data/products.json'
+		url: './data/products.json'
 	});
 var $author$project$Components$SlideInNotice$ShowNotice = {$: 'ShowNotice'};
 var $author$project$Main$SlideInNoticeMsg = function (a) {
